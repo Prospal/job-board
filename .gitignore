@@ -1,0 +1,18 @@
+# Never push your CV or tailored applications to GitHub
+*.pdf
+*.docx
+*.doc
+cv/
+applications/
+
+# Unencrypted scraper output (only docs/*.enc is published)
+data/
+docs/jobs.json
+docs/jobs.csv
+
+.DS_Store
+__pycache__/
+bayt_jobs.csv
+
+# Local editor/preview config
+.claude/

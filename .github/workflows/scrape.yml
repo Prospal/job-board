@@ -1,0 +1,57 @@
+name: Scrape jobs
+
+on:
+  schedule:
+    - cron: "0 1 * * *"   # every day 01:00 UTC
+  workflow_dispatch:       # "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scrape
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # Repo secret: Settings → Secrets and variables → Actions → DASHBOARD_PASSWORD
+      DASHBOARD_PASSWORD: ${{ secrets.DASHBOARD_PASSWORD }}
+      ENC: -aes-256-cbc -pbkdf2 -iter 200000 -md sha256 -salt -base64 -A -pass env:DASHBOARD_PASSWORD
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check password secret
+        run: |
+          if [ -z "$DASHBOARD_PASSWORD" ]; then
+            echo "::error::Set the DASHBOARD_PASSWORD repository secret first."; exit 1
+          fi
+
+      - name: Restore previous results
+        run: |
+          mkdir -p data
+          if [ -f docs/jobs.csv.enc ]; then
+            openssl enc -d $ENC -in docs/jobs.csv.enc -out data/jobs.csv || rm -f data/jobs.csv
+          fi
+
+      - name: Run scraper
+        run: python scraper.py
+
+      - name: Encrypt results
+        run: |
+          openssl enc $ENC -in data/jobs.json -out docs/jobs.json.enc
+          openssl enc $ENC -in data/jobs.csv -out docs/jobs.csv.enc
+
+      - name: Commit results
+        run: |
+          git config user.name "job-scraper-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/jobs.json.enc docs/jobs.csv.enc
+          git diff --cached --quiet || git commit -m "Update jobs $(date -u +%Y-%m-%d)"
+          git push
