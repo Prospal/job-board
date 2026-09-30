@@ -583,6 +583,9 @@ def main():
 
     new = sum(1 for r in rows if r.get("first_seen") == today)
     print(f"\nSaved {len(rows)} jobs to {OUTPUT_CSV} ({new} new today).")
+    print(f"LinkedIn descriptions fetched this run: {details_fetched[0]}; "
+          f"jobs with full description: {sum(1 for r in rows if r.get('has_description'))}; "
+          f"jobs with detected skills: {sum(1 for r in rows if r.get('skills'))}.")
 
 
 if __name__ == "__main__":
