@@ -66,13 +66,26 @@ label.tog { display: inline-flex; gap: 6px; align-items: center; color: var(--mu
 .links { display: flex; gap: 14px; align-items: center; }
 .linkbtn { background: none; border: 0; color: var(--muted); font: inherit; font-size: 13px; text-decoration: underline; cursor: pointer; padding: 0; }
 [hidden] { display: none !important; }
-details.cov { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 14px; }
-details.cov summary { cursor: pointer; padding: 12px 14px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 10px; }
-details.cov summary::after { content: "▾"; color: var(--muted); }
-details.cov[open] summary::after { content: "▴"; }
-details.cov summary .sub { font-weight: 400; }
-.cov-body { padding: 0 14px 14px; display: grid; gap: 18px; }
-.cov h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 0 0 8px; }
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+.tab { font: 600 14px Inter, sans-serif; color: var(--muted); background: none; border: 0; border-bottom: 2px solid transparent; padding: 9px 14px; cursor: pointer; margin-bottom: -1px; }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.panel { display: grid; gap: 14px; }
+.panel > .sub { margin: 0; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+.card .sub { margin: -4px 0 10px; }
+.panel h3, .card h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 0 0 10px; }
+.sk-h { margin: 6px 0 0 !important; }
+.sk-top { display: grid; grid-template-columns: 3fr 2fr; gap: 14px; align-items: start; }
+.sk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.skrow { display: grid; grid-template-columns: minmax(110px, 170px) 1fr 44px; gap: 10px; align-items: center; width: 100%;
+  background: none; border: 0; padding: 5px 4px; border-radius: 6px; font: inherit; color: var(--ink); text-align: left; cursor: pointer; }
+.skrow:hover { background: var(--chip); }
+.skname { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.skname .have { color: var(--accent); font-weight: 600; margin-left: 4px; font-size: 12px; }
+.bar { height: 8px; background: var(--chip); border-radius: 4px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--accent); border-radius: 0 4px 4px 0; }
+.skpct { font: 500 12px 'JetBrains Mono', monospace; color: var(--muted); text-align: right; }
+@media (max-width: 760px) { .sk-top { grid-template-columns: 1fr; } }
 .cov-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 8px; }
 .cty { border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px; cursor: pointer; background: var(--bg); text-align: left; font: inherit; color: var(--ink); }
 .cty:hover { border-color: var(--accent); }
@@ -120,18 +133,17 @@ details.cov summary .sub { font-weight: 400; }
 
   <div class="stats" id="stats"></div>
 
-  <details class="cov" id="coverage">
-    <summary><span>Coverage: where we scrape</span><span class="sub" id="covSummary"></span></summary>
-    <div class="cov-body">
-      <div><h3>Countries (click to filter)</h3><div class="cov-grid" id="covCountries"></div></div>
-      <div><h3>Sources, last run</h3><table class="src-table" id="covSources"></table></div>
-    </div>
-  </details>
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" data-tab="jobs" aria-selected="true">Jobs</button>
+    <button class="tab" role="tab" data-tab="skills" aria-selected="false">Skills</button>
+    <button class="tab" role="tab" data-tab="coverage" aria-selected="false">Coverage</button>
+  </nav>
 
-  <div class="filters">
+  <div class="filters" id="filters">
     <input type="search" id="q" placeholder="Search title, company, skills…">
     <select id="country"><option value="">All locations</option></select>
     <select id="work"><option value="">Remote + onsite</option><option value="remote">Remote</option><option value="onsite">Onsite</option></select>
+    <select id="skill"><option value="">Any skill</option></select>
     <select id="status">
       <option value="">Any status</option><option value="new">New</option><option value="saved">Saved</option>
       <option value="applied">Applied</option><option value="interview">Interview</option>
@@ -142,7 +154,23 @@ details.cov summary .sub { font-weight: 400; }
     <label class="tog"><input type="checkbox" id="hideSkipped" checked> Hide skipped</label>
   </div>
 
-  <div class="list" id="list"></div>
+  <section class="panel" id="panel-jobs"><div class="list" id="list"></div></section>
+
+  <section class="panel" id="panel-skills" hidden>
+    <p class="sub" id="skillsNote"></p>
+    <div class="sk-top">
+      <div class="card"><h3>Most requested</h3><div id="skTop"></div></div>
+      <div class="card"><h3>Your biggest gaps</h3><p class="sub">Most requested skills that aren't in your <code>MY_SKILLS</code> list.</p><div id="skGaps"></div></div>
+    </div>
+    <h3 class="sk-h">By category</h3>
+    <div class="sk-grid" id="skCats"></div>
+  </section>
+
+  <section class="panel" id="panel-coverage" hidden>
+    <p class="sub" id="covSummary"></p>
+    <div class="card"><h3>Countries (click to filter)</h3><div class="cov-grid" id="covCountries"></div></div>
+    <div class="card"><h3>Sources, last run</h3><table class="src-table" id="covSources"></table></div>
+  </section>
 </div>
 
 <script>
@@ -198,9 +226,71 @@ async function unlock(password, remember) {
   const places = [...new Set(jobs.map(place))].sort();
   $("country").innerHTML = `<option value="">All locations</option>` +
     places.map(p => `<option value="${esc(p)}">${esc(p[0].toUpperCase() + p.slice(1))}</option>`).join("");
+  skillsMeta = data.skills || {categories: {}, mine: []};
+  const counts = {};
+  jobs.forEach(j => skillsOf(j).forEach(s => counts[s] = (counts[s] || 0) + 1));
+  $("skill").innerHTML = `<option value="">Any skill</option>` + Object.entries(skillsMeta.categories).map(([cat, list]) =>
+    `<optgroup label="${esc(cat)}">${list.filter(s => counts[s]).map(s =>
+      `<option value="${esc(s)}">${esc(s)} (${counts[s]})</option>`).join("")}</optgroup>`).join("");
   renderCoverage(data.coverage || {});
   render();
 }
+
+// ── Tabs
+let activeTab = "jobs";
+let skillsMeta = {categories: {}, mine: []};
+const skillsOf = j => j.skills ? j.skills.split(", ") : [];
+
+function showTab(name) {
+  activeTab = name;
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.tab === name));
+  ["jobs", "skills", "coverage"].forEach(p => $("panel-" + p).hidden = p !== name);
+  $("filters").hidden = name === "coverage";
+  render();
+}
+document.querySelector(".tabs").addEventListener("click", e => {
+  if (e.target.matches(".tab")) showTab(e.target.dataset.tab);
+});
+
+// ── Skills tab: share of jobs (matching the current filters) that ask for each skill.
+function renderSkills(pool) {
+  const described = pool.filter(j => j.has_description);
+  const n = described.length;
+  const cnt = {};
+  described.forEach(j => skillsOf(j).forEach(s => cnt[s] = (cnt[s] || 0) + 1));
+  const mine = new Set(skillsMeta.mine || []);
+  const scopeNote = $("skill").value ? " (skill filter ignored here)" : "";
+  $("skillsNote").textContent = n
+    ? `Based on ${n} jobs with a full description, out of ${pool.length} matching your filters${scopeNote}. Click a skill to see its jobs.`
+    : "No jobs with full descriptions match these filters yet.";
+
+  const max = Math.max(1, ...Object.values(cnt));
+  const row = s => {
+    const pct = n ? Math.round(cnt[s] / n * 100) : 0;
+    return `<button class="skrow" data-skill="${esc(s)}" title="${esc(s)}: ${cnt[s]} of ${n} jobs (${pct}%)">
+      <span class="skname">${esc(s)}${mine.has(s) ? `<span class="have">✓ you</span>` : ""}</span>
+      <span class="bar"><i style="width:${(cnt[s] / max * 100).toFixed(1)}%"></i></span>
+      <span class="skpct">${pct}%</span></button>`;
+  };
+  const ranked = Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a]);
+  $("skTop").innerHTML = ranked.slice(0, 15).map(row).join("") || `<p class="sub">Nothing yet.</p>`;
+  const gaps = ranked.filter(s => !mine.has(s)).slice(0, 8);
+  $("skGaps").innerHTML = gaps.map(row).join("") || `<p class="sub">No gaps: you list every top skill.</p>`;
+
+  $("skCats").innerHTML = Object.entries(skillsMeta.categories)
+    .map(([cat, list]) => [cat, list.filter(s => cnt[s]).sort((a, b) => cnt[b] - cnt[a])])
+    .filter(([, list]) => list.length)
+    .sort((a, b) => cnt[b[1][0]] - cnt[a[1][0]])
+    .map(([cat, list]) => `<div class="card"><h3>${esc(cat)}</h3>${list.map(row).join("")}</div>`).join("");
+}
+
+$("panel-skills").addEventListener("click", e => {
+  const btn = e.target.closest(".skrow");
+  if (!btn) return;
+  $("skill").value = btn.dataset.skill;
+  showTab("jobs");
+  window.scrollTo({top: 0, behavior: "smooth"});
+});
 
 const SOURCE_NAMES = {greenhouse: "Greenhouse (company sites)", lever: "Lever (company sites)",
   ashby: "Ashby (company sites)", workday: "Workday (company sites)", bayt: "Bayt", gulftalent: "GulfTalent",
@@ -260,8 +350,8 @@ $("covCountries").addEventListener("click", e => {
   const sel = $("country");
   if (![...sel.options].some(o => o.value === btn.dataset.place)) return;  // no jobs there today
   sel.value = btn.dataset.place;
-  render();
-  $("list").scrollIntoView({behavior: "smooth"});
+  showTab("jobs");
+  window.scrollTo({top: 0, behavior: "smooth"});
 });
 
 $("loginForm").addEventListener("submit", async e => {
@@ -293,13 +383,14 @@ if (storedPw()) unlock(storedPw(), false).catch(() => {
   try { sessionStorage.removeItem(PW_KEY); localStorage.removeItem(PW_KEY); } catch (e) {}
 });
 
-["q","country","work","status","reloc","hideRestricted","hideSkipped"].forEach(id => $(id).addEventListener("input", render));
+["q","country","work","skill","status","reloc","hideRestricted","hideSkipped"].forEach(id => $(id).addEventListener("input", render));
 
 function render() {
   const q = $("q").value.toLowerCase().trim();
-  const shown = jobs.filter(j => {
+  const passes = (j, ignoreSkill) => {
     const st = statusOf(j);
-    if (q && !`${j.title} ${j.company} ${j.location} ${j.matched_skills}`.toLowerCase().includes(q)) return false;
+    if (q && !`${j.title} ${j.company} ${j.location} ${j.skills}`.toLowerCase().includes(q)) return false;
+    if (!ignoreSkill && $("skill").value && !skillsOf(j).includes($("skill").value)) return false;
     if ($("country").value && place(j) !== $("country").value) return false;
     if ($("work").value && j.work_type !== $("work").value) return false;
     if ($("status").value && st !== $("status").value) return false;
@@ -307,7 +398,9 @@ function render() {
     if ($("hideRestricted").checked && (j.citizens_only || j.no_sponsorship || j.remote_restricted)) return false;
     if ($("hideSkipped").checked && st === "skip" && $("status").value !== "skip") return false;
     return true;
-  });
+  };
+  const shown = jobs.filter(j => passes(j));
+  if (activeTab === "skills") renderSkills(jobs.filter(j => passes(j, true)));
 
   const count = s => jobs.filter(j => statusOf(j) === s).length;
   $("stats").innerHTML = [
@@ -338,7 +431,8 @@ function render() {
         <a class="title" href="${esc(j.apply_url)}" target="_blank" rel="noopener">${esc(j.title)}</a>
         <div class="meta">${esc(j.company)} · ${esc(j.location || "—")}${j.posted ? " · " + esc(j.posted) : ""}</div>
         <div class="chips">${chips}</div>
-        ${j.matched_skills ? `<div class="meta" style="margin-top:6px">Skills: ${esc(j.matched_skills)}</div>` : ""}
+        ${j.skills ? `<div class="meta" style="margin-top:6px">Skills: ${skillsOf(j).map(s =>
+          (skillsMeta.mine || []).includes(s) ? `<b>✓ ${esc(s)}</b>` : esc(s)).join(" · ")}</div>` : ""}
         ${j.description ? `<button class="more">Show summary</button><div class="desc">${esc(j.description)}…</div>` : ""}
       </div>
       <div class="side">

@@ -15,7 +15,7 @@ concurrency:
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 50
     env:
       # Repo secret: Settings → Secrets and variables → Actions → DASHBOARD_PASSWORD
       DASHBOARD_PASSWORD: ${{ secrets.DASHBOARD_PASSWORD }}

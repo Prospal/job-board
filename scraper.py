@@ -113,13 +113,77 @@ RESTRICTED_PATTERNS = [r"(uae|qatari|saudi|omani|kuwaiti|bahraini|emirati) natio
 LANGUAGE_PATTERNS = [r"japanese", r"\bjlpt\b", r"\bn[12]\b", r"arabic", r"mandarin", r"cantonese",
                      r"german \(?(c1|b2|fluent)", r"fluent (in )?german", r"dutch", r"bahasa", r"korean"]
 
-# Keywords used to score how well a job matches you (edit to match your CV).
+# Skills detected in job descriptions: category -> {skill name: regex on lowercase text}.
+# Powers the dashboard's Skills tab and skill filter.
+SKILLS = {
+    "SIEM & monitoring": {
+        "SIEM": r"\bsiem\b", "Splunk": r"splunk", "Microsoft Sentinel": r"\bsentinel\b(?!one)",
+        "QRadar": r"qradar", "Elastic / ELK": r"\belastic(search)?\b|\belk\b", "SOAR": r"\bsoar\b",
+    },
+    "Endpoint (EDR/XDR)": {
+        "EDR / XDR": r"\b[ex]dr\b", "CrowdStrike": r"crowdstrike|falcon", "Microsoft Defender": r"defender",
+        "SentinelOne": r"sentinel ?one", "Carbon Black": r"carbon black",
+    },
+    "Security operations": {
+        "Incident response": r"incident (response|handling)|\bdfir\b", "Threat hunting": r"threat hunt",
+        "Threat intelligence": r"threat intel|\bcti\b", "Digital forensics": r"forensic",
+        "Malware analysis": r"malware analy|reverse engineer", "Detection engineering": r"detection (engineering|rules?|content)|sigma rules?|\byara\b",
+        "Vulnerability management": r"vulnerability (management|assessment|scann)", "SOC": r"\bsoc\b(?! ?2)",
+    },
+    "Offensive security": {
+        "Penetration testing": r"penetration test|\bpen ?test", "Red teaming": r"red team",
+        "Burp Suite": r"burp", "Metasploit": r"metasploit", "OWASP": r"owasp", "Bug bounty": r"bug bounty",
+    },
+    "Cloud & platform": {
+        "AWS": r"\baws\b|amazon web services", "Azure": r"\bazure\b", "GCP": r"\bgcp\b|google cloud",
+        "Kubernetes": r"kubernetes|\bk8s\b", "Docker / containers": r"docker|container", "Terraform / IaC": r"terraform|infrastructure as code|\biac\b",
+        "Cloud security (CSPM/CNAPP)": r"cloud security|\bcspm\b|\bcnapp\b|\bcwpp\b",
+    },
+    "Network security": {
+        "Firewalls": r"firewall", "Palo Alto": r"palo alto", "Fortinet": r"fortinet|fortigate",
+        "IDS / IPS": r"\bids\b|\bips\b|intrusion (detection|prevention)", "Zero Trust": r"zero trust",
+        "TCP/IP & networking": r"tcp/ip|networking|network protocols",
+    },
+    "Identity & access": {
+        "IAM": r"\biam\b|identity and access", "Active Directory": r"active directory|\bentra\b",
+        "PAM / CyberArk": r"\bpam\b|privileged access|cyberark", "SSO / SAML / OAuth": r"\bsso\b|\bsaml\b|oauth|openid",
+        "Okta": r"\bokta\b",
+    },
+    "AppSec & DevSecOps": {
+        "DevSecOps / CI/CD": r"devsecops|ci ?/ ?cd", "SAST / DAST": r"\bsast\b|\bdast\b|static analysis",
+        "Secure code review": r"code review|secure coding", "Threat modeling": r"threat model",
+    },
+    "Frameworks & GRC": {
+        "MITRE ATT&CK": r"mitre|att&ck", "NIST": r"\bnist\b", "ISO 27001": r"iso ?27001|iso/iec 27001",
+        "SOC 2": r"\bsoc ?2\b", "PCI DSS": r"pci", "GDPR / privacy": r"gdpr|privacy", "Risk assessment": r"risk (assessment|management)",
+        "CIS Controls": r"\bcis (controls|benchmarks?)\b", "NCA / NESA (Gulf)": r"\bnca\b|\bnesa\b|\bsama\b",
+    },
+    "OT / ICS": {"ICS / SCADA / OT": r"\bics\b|scada|\bot security|operational technology", "IEC 62443": r"62443"},
+    "Programming & OS": {
+        "Python": r"python", "PowerShell": r"powershell", "Bash / shell": r"\bbash\b|shell script",
+        "Go": r"golang", "SQL / KQL": r"\bsql\b|\bkql\b", "JavaScript": r"javascript|typescript",
+        "Linux": r"linux", "Windows": r"windows",
+    },
+    "Certifications": {
+        "CISSP": r"cissp", "CISM": r"\bcism\b", "CISA": r"\bcisa\b", "OSCP": r"\boscp\b|\bose[pd]\b|\bosw[ea]\b",
+        "CEH": r"\bceh\b|certified ethical hacker", "Security+": r"security\+|sec\+", "GIAC": r"giac|\bg(cih|cia|cfa|pen|sec|rem|cfe)\b",
+        "CCSP": r"\bccsp\b", "AWS / Azure security cert": r"aws certified security|az-500|sc-200",
+    },
+}
+_SKILL_RE = [(cat, name, re.compile(rx)) for cat, group in SKILLS.items() for name, rx in group.items()]
+
+# YOUR skills, using the names from SKILLS above. Jobs asking for these score higher,
+# and the Skills tab marks them "you have". Edit to match your CV.
 MY_SKILLS = [
-    "siem", "splunk", "sentinel", "qradar", "elastic", "soc", "incident response",
-    "threat hunting", "edr", "crowdstrike", "mitre", "nist", "iso 27001", "pentest",
-    "burp", "owasp", "python", "linux", "aws", "azure", "gcp", "kubernetes",
-    "vulnerability", "nessus", "firewall", "network security", "security+", "ceh", "oscp",
+    "SIEM", "Splunk", "Microsoft Sentinel", "SOC", "Incident response", "Threat hunting",
+    "EDR / XDR", "MITRE ATT&CK", "NIST", "ISO 27001", "Penetration testing", "Burp Suite",
+    "OWASP", "Python", "Linux", "AWS", "Azure", "Vulnerability management", "Firewalls",
+    "Security+", "CEH",
 ]
+
+# LinkedIn search results have no description; open each new job's page to read it.
+LINKEDIN_DETAILS = True
+LINKEDIN_DETAIL_LIMIT = 250   # new job pages per run (cached afterwards, so this only bites on the first run)
 
 REQUEST_DELAY = 0.5  # seconds between requests, be polite
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) job-scraper/1.0"
@@ -325,6 +389,15 @@ def from_linkedin():
                               link_type="listing")
 
 
+def linkedin_description(url):
+    m = re.search(r"-(\d{6,})/?$", url) or re.search(r"/view/(\d+)", url)
+    if not m:
+        return ""
+    page = fetch_text(f"https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/{m.group(1)}",
+                      delay=LINKEDIN_DELAY)
+    return first(r'show-more-less-html__markup[^>]*>(.*?)</div>', page)
+
+
 def from_remotive():
     for term in ["security", "cyber", "soc analyst", "penetration"]:
         q = urllib.parse.quote(term)
@@ -377,9 +450,10 @@ def enrich(j):
     no_sponsor = any_match(NO_SPONSOR_PATTERNS, desc)
     languages = any_match(LANGUAGE_PATTERNS, desc)
     citizens_only = any_match(RESTRICTED_PATTERNS, j["title"].lower() + " " + desc)
-    skills = [s for s in MY_SKILLS if s in desc]
+    found = [name for _, name, rx in _SKILL_RE if rx.search(j["title"].lower() + " " + desc)]
+    mine = [s for s in found if s in MY_SKILLS]
 
-    score = len(skills) * 2
+    score = len(mine) * 2
     score += 10 if relocation and not no_sponsor else 0
     score += 5 if is_remote and not restricted else 0
     score -= 15 if no_sponsor else 0
@@ -395,7 +469,9 @@ def enrich(j):
         "other_language": ", ".join(languages),
         "citizens_only": "yes" if citizens_only else "",
         "remote_restricted": ", ".join(restricted),
-        "matched_skills": ", ".join(skills),
+        "matched_skills": ", ".join(mine),
+        "skills": ", ".join(found),
+        "has_description": "yes" if len(desc) > 200 else "",
         "score": score,
     })
     return j
@@ -404,7 +480,8 @@ def enrich(j):
 
 COLUMNS = ["score", "title", "company", "work_type", "location", "target_country",
            "apply_url", "link_type", "relocation_or_visa", "no_sponsorship",
-           "other_language", "citizens_only", "remote_restricted", "matched_skills", "posted",
+           "other_language", "citizens_only", "remote_restricted", "matched_skills", "skills",
+           "has_description", "posted",
            "source", "first_seen", "status", "description"]
 
 
@@ -431,6 +508,24 @@ def main():
     today = date.today().isoformat()
     results = {}
     source_stats = []
+    details_fetched = [0]
+
+    def fill_description(j):
+        """LinkedIn cards have no description: reuse the one saved last run, else fetch it."""
+        if j["source"] != "linkedin" or j["description"] or not LINKEDIN_DETAILS:
+            return j
+        desc = existing.get(j["apply_url"], {}).get("description", "")
+        if not desc and details_fetched[0] < LINKEDIN_DETAIL_LIMIT:
+            details_fetched[0] += 1
+            desc = linkedin_description(j["apply_url"])
+        if desc:
+            j["description"] = desc
+            j = enrich(j) or j
+        return j
+
+    unknown = [s for s in MY_SKILLS if s not in {n for _, n, _ in _SKILL_RE}]
+    if unknown:
+        print(f"! MY_SKILLS names not in SKILLS (ignored): {unknown}", file=sys.stderr)
 
     for name, slug, fn in sources:
         label = slug[0] if isinstance(slug, tuple) else slug
@@ -443,6 +538,7 @@ def main():
                 j = enrich(raw)
                 if not j or j["apply_url"] in results:
                     continue
+                j = fill_description(j)
                 old = existing.get(j["apply_url"], {})
                 j["first_seen"] = old.get("first_seen", today)
                 j["status"] = old.get("status", "new")  # keep your manual status edits
@@ -480,8 +576,10 @@ def main():
             },
             "sources": source_stats,
         }
+        skills_meta = {"categories": {cat: list(group) for cat, group in SKILLS.items()},
+                       "mine": [s for s in MY_SKILLS if any(s in g for g in SKILLS.values())]}
         json.dump({"generated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-                   "coverage": coverage, "jobs": slim}, f, ensure_ascii=False)
+                   "coverage": coverage, "skills": skills_meta, "jobs": slim}, f, ensure_ascii=False)
 
     new = sum(1 for r in rows if r.get("first_seen") == today)
     print(f"\nSaved {len(rows)} jobs to {OUTPUT_CSV} ({new} new today).")
