@@ -14,6 +14,16 @@ Running `scraper.py` locally writes plain files to `data/` (git-ignored).
 
 Edit the CONFIG block at the top of `scraper.py` to change companies, countries, keywords and skills.
 
+## Private files / new computer
+
+CVs and applications live in a separate **private** repo, cloned into `private/` (ignored by this repo):
+
+```bash
+gh repo clone Prospal/job-board
+cd job-board
+gh repo clone Prospal/job-private private
+```
+
 ## Dashboard password
 
 The dashboard password **is** the `DASHBOARD_PASSWORD` secret. GitHub never shows a secret again after

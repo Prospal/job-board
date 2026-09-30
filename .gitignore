@@ -14,5 +14,8 @@ docs/jobs.csv
 __pycache__/
 bayt_jobs.csv
 
+# Private companion repo (Prospal/job-private) cloned here
+private/
+
 # Local editor/preview config
 .claude/
