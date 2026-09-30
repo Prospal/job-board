@@ -72,15 +72,29 @@ TITLE_KEYWORDS = [
 TITLE_EXCLUDE = ["security guard", "security officer", "sales", "account executive",
                  "marketing", "recruiter", "securities"]
 
-# Onsite jobs are kept only in these countries/cities (English-friendly, relocation common).
-TARGET_LOCATIONS = [
-    "singapore", "japan", "tokyo", "osaka", "qatar", "doha",
-    "united arab emirates", "uae", "dubai", "abu dhabi", "saudi", "riyadh",
-    "hong kong", "malaysia", "kuala lumpur", "netherlands", "amsterdam",
-    "bahrain", "manama", "kuwait", "oman", "muscat", "jeddah",
-    "ireland", "dublin", "luxembourg", "berlin", "germany", "united kingdom",
-    "london", "estonia", "tallinn", "australia", "sydney", "melbourne",
-]
+# Onsite jobs are kept only in these countries (English-friendly, relocation common).
+# Country -> words that identify it in a job's location text (matched as whole words).
+TARGET_COUNTRIES = {
+    "Singapore": ["singapore"],
+    "Japan": ["japan", "tokyo", "osaka"],
+    "Qatar": ["qatar", "doha"],
+    "UAE": ["united arab emirates", "uae", "dubai", "abu dhabi"],
+    "Saudi Arabia": ["saudi", "riyadh", "jeddah", "ksa"],
+    "Bahrain": ["bahrain", "manama"],
+    "Kuwait": ["kuwait"],
+    "Oman": ["oman", "muscat"],
+    "Hong Kong": ["hong kong"],
+    "Malaysia": ["malaysia", "kuala lumpur"],
+    "Netherlands": ["netherlands", "amsterdam"],
+    "Ireland": ["ireland", "dublin"],
+    "Luxembourg": ["luxembourg"],
+    "Germany": ["germany", "berlin"],
+    "United Kingdom": ["united kingdom", "london"],
+    "Estonia": ["estonia", "tallinn"],
+    "Australia": ["australia", "sydney", "melbourne"],
+}
+_COUNTRY_RE = [(name, re.compile(r"\b(" + "|".join(map(re.escape, words)) + r")\b"))
+               for name, words in TARGET_COUNTRIES.items()]
 REMOTE_WORDS = ["remote", "anywhere", "worldwide", "global", "distributed"]
 
 # Remote jobs locked to these regions are flagged (you probably can't take them).
@@ -113,6 +127,9 @@ UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) job-scraper/1.0"
 # ─────────────────────────── HELPERS ───────────────────────────
 
 
+FAILED_REQUESTS = [0]  # failures in the current source, shown in the dashboard's coverage panel
+
+
 def fetch(url, data=None, headers=None, delay=REQUEST_DELAY, retries=1):
     """GET/POST with a timeout and one retry. Returns the body text, or None on failure."""
     req = urllib.request.Request(url, data=data, headers={"User-Agent": UA, **(headers or {})})
@@ -123,6 +140,7 @@ def fetch(url, data=None, headers=None, delay=REQUEST_DELAY, retries=1):
         except OSError as e:  # URLError, HTTPError, socket timeouts, SSL errors
             if attempt == retries or getattr(e, "code", 0) in (401, 403, 404, 422):
                 print(f"  ! {url} -> {e}", file=sys.stderr)
+                FAILED_REQUESTS[0] += 1
                 return None
             time.sleep(3)
         finally:
@@ -349,7 +367,7 @@ def enrich(j):
     loc = j["location"].lower()
     desc = j["description"].lower()
     is_remote = bool(j["remote"]) or any(w in loc for w in REMOTE_WORDS)
-    target = next((c for c in TARGET_LOCATIONS if c in loc), "")
+    target = next((name for name, rx in _COUNTRY_RE if rx.search(loc)), "")
 
     if not is_remote and not target:
         return None
@@ -412,11 +430,14 @@ def main():
     existing = load_existing(OUTPUT_CSV)
     today = date.today().isoformat()
     results = {}
+    source_stats = []
 
     for name, slug, fn in sources:
         label = slug[0] if isinstance(slug, tuple) else slug
         print(f"→ {name}{' / ' + label if label else ''}")
         count = 0
+        FAILED_REQUESTS[0] = 0
+        crashed = False
         try:
             for raw in (fn(slug) if slug else fn()):
                 j = enrich(raw)
@@ -430,7 +451,10 @@ def main():
                 count += 1
         except Exception as e:  # one broken source must not kill the whole run
             print(f"  ! {name} failed: {e!r}", file=sys.stderr)
+            crashed = True
         print(f"   kept {count}")
+        source_stats.append({"source": name, "company": label or "", "kept": count,
+                             "failed_requests": FAILED_REQUESTS[0], "crashed": crashed})
 
     # Keep jobs you've already touched even if they disappeared from the feed.
     for url, row in existing.items():
@@ -447,8 +471,17 @@ def main():
     with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
         slim = [{k: r.get(k, "") for k in COLUMNS if k != "description"}
                 | {"description": (r.get("description") or "")[:400]} for r in rows]
+        coverage = {
+            "countries": list(TARGET_COUNTRIES),
+            "board_countries": {  # which job boards search each country directly
+                "bayt": [c.replace("-", " ").title().replace("Uae", "UAE") for c in BAYT_COUNTRIES],
+                "gulftalent": ["Qatar", "UAE", "Saudi Arabia", "Bahrain", "Kuwait", "Oman"],
+                "linkedin": [l.replace("United Arab Emirates", "UAE") for l in LINKEDIN_LOCATIONS],
+            },
+            "sources": source_stats,
+        }
         json.dump({"generated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-                   "jobs": slim}, f, ensure_ascii=False)
+                   "coverage": coverage, "jobs": slim}, f, ensure_ascii=False)
 
     new = sum(1 for r in rows if r.get("first_seen") == today)
     print(f"\nSaved {len(rows)} jobs to {OUTPUT_CSV} ({new} new today).")

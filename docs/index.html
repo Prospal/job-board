@@ -66,6 +66,26 @@ label.tog { display: inline-flex; gap: 6px; align-items: center; color: var(--mu
 .links { display: flex; gap: 14px; align-items: center; }
 .linkbtn { background: none; border: 0; color: var(--muted); font: inherit; font-size: 13px; text-decoration: underline; cursor: pointer; padding: 0; }
 [hidden] { display: none !important; }
+details.cov { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 14px; }
+details.cov summary { cursor: pointer; padding: 12px 14px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 10px; }
+details.cov summary::after { content: "▾"; color: var(--muted); }
+details.cov[open] summary::after { content: "▴"; }
+details.cov summary .sub { font-weight: 400; }
+.cov-body { padding: 0 14px 14px; display: grid; gap: 18px; }
+.cov h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 0 0 8px; }
+.cov-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 8px; }
+.cty { border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px; cursor: pointer; background: var(--bg); text-align: left; font: inherit; color: var(--ink); }
+.cty:hover { border-color: var(--accent); }
+.cty.zero { opacity: .55; }
+.cty-top { display: flex; justify-content: space-between; align-items: baseline; font-weight: 600; }
+.cty-top b { font: 500 15px 'JetBrains Mono', monospace; }
+.cty .chips { margin-top: 6px; }
+.src-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.src-table td, .src-table th { padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: left; }
+.src-table th { color: var(--muted); font-weight: 500; font-size: 12px; }
+.src-table td.num { font-family: 'JetBrains Mono', monospace; text-align: right; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+.dot.ok { background: var(--accent); } .dot.warn { background: var(--warn); } .dot.bad { background: var(--bad); }
 @media (max-width: 640px) {
   .job { grid-template-columns: 1fr; }
   .score { width: 52px; }
@@ -99,6 +119,14 @@ label.tog { display: inline-flex; gap: 6px; align-items: center; color: var(--mu
   </header>
 
   <div class="stats" id="stats"></div>
+
+  <details class="cov" id="coverage">
+    <summary><span>Coverage: where we scrape</span><span class="sub" id="covSummary"></span></summary>
+    <div class="cov-body">
+      <div><h3>Countries (click to filter)</h3><div class="cov-grid" id="covCountries"></div></div>
+      <div><h3>Sources, last run</h3><table class="src-table" id="covSources"></table></div>
+    </div>
+  </details>
 
   <div class="filters">
     <input type="search" id="q" placeholder="Search title, company, skills…">
@@ -170,8 +198,71 @@ async function unlock(password, remember) {
   const places = [...new Set(jobs.map(place))].sort();
   $("country").innerHTML = `<option value="">All locations</option>` +
     places.map(p => `<option value="${esc(p)}">${esc(p[0].toUpperCase() + p.slice(1))}</option>`).join("");
+  renderCoverage(data.coverage || {});
   render();
 }
+
+const SOURCE_NAMES = {greenhouse: "Greenhouse (company sites)", lever: "Lever (company sites)",
+  ashby: "Ashby (company sites)", workday: "Workday (company sites)", bayt: "Bayt", gulftalent: "GulfTalent",
+  linkedin: "LinkedIn", remotive: "Remotive", remoteok: "RemoteOK", jobicy: "Jobicy"};
+
+function renderCoverage(cov) {
+  // Per-source health from the last run (grouped: one row per source, companies summed).
+  const bySource = {};
+  for (const s of cov.sources || []) {
+    const g = bySource[s.source] ||= {kept: 0, failed: 0, units: 0, emptyUnits: []};
+    g.kept += s.kept; g.failed += s.failed_requests + (s.crashed ? 1 : 0); g.units++;
+    if (s.company && !s.kept) g.emptyUnits.push(s.company);
+  }
+  const health = g => !g ? "" : g.kept === 0 && g.failed > 0 ? "bad" : g.failed > 0 ? "warn" : "ok";
+  const healthText = {ok: "working", warn: "partly failing", bad: "blocked / failing"};
+
+  $("covSources").innerHTML = `<tr><th>Source</th><th>Status</th><th style="text-align:right">Jobs kept</th><th>Notes</th></tr>` +
+    Object.entries(bySource).map(([name, g]) => {
+      const h = health(g);
+      const note = g.units > 1 ? `${g.units} companies` + (g.emptyUnits.length ? `, none matching today: ${g.emptyUnits.join(", ")}` : "") : "";
+      return `<tr><td>${esc(SOURCE_NAMES[name] || name)}</td><td><span class="dot ${h}"></span>${healthText[h]}</td>
+        <td class="num">${g.kept}</td><td class="sub">${esc(note)}</td></tr>`;
+    }).join("");
+
+  // Per-country job counts and which sources produced them.
+  const boards = cov.board_countries || {};
+  const countries = [...(cov.countries || [...new Set(jobs.map(j => j.target_country).filter(Boolean))])];
+  const tiles = [["remote", "Remote"], ...countries.map(c => [c, c])].map(([key, label]) => {
+    const list = jobs.filter(j => place(j) === key);
+    const srcCount = {};
+    list.forEach(j => srcCount[j.source] = (srcCount[j.source] || 0) + 1);
+    const chips = Object.entries(srcCount).sort((a, b) => b[1] - a[1])
+      .map(([s, n]) => `<span class="chip">${esc(s)} ${n}</span>`);
+    for (const [b, cs] of Object.entries(boards)) {
+      if (cs.includes(label) && !srcCount[b]) {
+        const h = health(bySource[b]);
+        chips.push(`<span class="chip ${h === "bad" ? "bad" : ""}">${esc(b)} ${h === "bad" ? "blocked" : "0"}</span>`);
+      }
+    }
+    return {key, label, n: list.length, html: chips.join("")};
+  });
+  $("covCountries").innerHTML = tiles.map(t => `
+    <button class="cty ${t.n ? "" : "zero"}" data-place="${esc(t.key)}">
+      <div class="cty-top"><span>${esc(t.label)}</span><b>${t.n}</b></div>
+      <div class="chips">${t.html || `<span class="chip">only company sites search here</span>`}</div>
+    </button>`).join("");
+
+  const active = tiles.filter(t => t.n).length;
+  const blocked = Object.entries(bySource).filter(([, g]) => health(g) === "bad").map(([n]) => SOURCE_NAMES[n] || n);
+  $("covSummary").textContent = `${countries.length} countries + remote · ${active} with jobs today` +
+    (blocked.length ? ` · blocked: ${blocked.join(", ")}` : "");
+}
+
+$("covCountries").addEventListener("click", e => {
+  const btn = e.target.closest(".cty");
+  if (!btn) return;
+  const sel = $("country");
+  if (![...sel.options].some(o => o.value === btn.dataset.place)) return;  // no jobs there today
+  sel.value = btn.dataset.place;
+  render();
+  $("list").scrollIntoView({behavior: "smooth"});
+});
 
 $("loginForm").addEventListener("submit", async e => {
   e.preventDefault();
