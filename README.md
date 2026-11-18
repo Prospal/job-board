@@ -7,6 +7,9 @@ English-speaking hubs with relocation), with a dashboard on GitHub Pages.
   Gulf boards (Bayt, GulfTalent), LinkedIn's public search and remote boards (Remotive, RemoteOK, Jobicy).
 - `.github/workflows/scrape.yml` runs it every day at 01:00 UTC and commits encrypted `docs/jobs.csv.enc` + `docs/jobs.json.enc`.
 - `docs/index.html` is the dashboard (filters, apply links, per-browser status tracking).
+- `docs/scholarships.json` feeds the **Scholarships** tab: a hand-curated list of S2/S3 scholarships in Europe
+  and China with deadlines, requirements and a document checklist. It is public info, so it is not encrypted.
+  Update it by hand each cycle (bump `verified`, set `deadline_confirmed: true` once the official call is out).
 
 The job data is encrypted (AES-256, PBKDF2) with the `DASHBOARD_PASSWORD` repository secret before it is
 committed, so only `docs/*.enc` is public; the dashboard asks for that password and decrypts in the browser.

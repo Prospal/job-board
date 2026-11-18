@@ -99,8 +99,26 @@ label.tog { display: inline-flex; gap: 6px; align-items: center; color: var(--mu
 .src-table td.num { font-family: 'JetBrains Mono', monospace; text-align: right; }
 .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
 .dot.ok { background: var(--accent); } .dot.warn { background: var(--warn); } .dot.bad { background: var(--bad); }
+.sch { grid-template-columns: 76px 1fr auto; }
+.dl { font: 500 13px 'JetBrains Mono', monospace; text-align: center; border-radius: 8px; padding: 6px 2px; background: var(--chip); color: var(--muted); line-height: 1.2; }
+.dl small { display: block; font: 500 10.5px Inter, sans-serif; }
+.dl.soon { background: var(--warn-soft); color: var(--warn); }
+.dl.open { background: var(--accent-soft); color: var(--accent); }
+.req { display: none; margin-top: 10px; gap: 10px; }
+.sch.open .req { display: grid; }
+.req-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 6px 14px; font-size: 13px; }
+.req-facts b { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 600; }
+.req h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 4px 0 4px; }
+.req ul, .req ol { margin: 0; padding-left: 18px; font-size: 13px; }
+.checklist { display: grid; gap: 3px; font-size: 13px; }
+.checklist label { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; }
+.checklist input { margin-top: 3px; }
+.checklist label:has(input:checked) span { color: var(--muted); text-decoration: line-through; }
+.tip { background: var(--accent-soft); color: var(--ink); border-radius: 8px; padding: 8px 10px; font-size: 13px; }
+.prog { font-size: 12px; color: var(--muted); }
 @media (max-width: 640px) {
   .job { grid-template-columns: 1fr; }
+  .dl { width: 90px; }
   .score { width: 52px; }
   .side { flex-direction: row; }
   .side > * { flex: 1; }
@@ -137,6 +155,7 @@ label.tog { display: inline-flex; gap: 6px; align-items: center; color: var(--mu
     <button class="tab" role="tab" data-tab="jobs" aria-selected="true">Jobs</button>
     <button class="tab" role="tab" data-tab="skills" aria-selected="false">Skills</button>
     <button class="tab" role="tab" data-tab="coverage" aria-selected="false">Coverage</button>
+    <button class="tab" role="tab" data-tab="scholarships" aria-selected="false">Scholarships</button>
   </nav>
 
   <div class="filters" id="filters">
@@ -170,6 +189,27 @@ label.tog { display: inline-flex; gap: 6px; align-items: center; color: var(--mu
     <p class="sub" id="covSummary"></p>
     <div class="card"><h3>Countries (click to filter)</h3><div class="cov-grid" id="covCountries"></div></div>
     <div class="card"><h3>Sources, last run</h3><table class="src-table" id="covSources"></table></div>
+  </section>
+
+  <section class="panel" id="panel-scholarships" hidden>
+    <div class="filters">
+      <input type="search" id="sq" placeholder="Search scholarship, country, field…">
+      <select id="sRegion"><option value="">Europe + China</option><option value="Europe">Europe</option><option value="China">China</option></select>
+      <select id="sCountry"><option value="">All countries</option></select>
+      <select id="sLevel"><option value="">S2 + S3</option><option value="S2">S2 (Master)</option><option value="S3">S3 (PhD)</option></select>
+      <select id="sFunding"><option value="">Full + partial</option><option value="full">Fully funded</option><option value="partial">Partial</option></select>
+      <select id="sStatus">
+        <option value="">Any status</option><option value="new">New</option><option value="interested">Interested</option>
+        <option value="preparing">Preparing</option><option value="applied">Applied</option><option value="accepted">Accepted</option>
+        <option value="rejected">Rejected</option><option value="skip">Skipped</option>
+      </select>
+      <label class="tog"><input type="checkbox" id="sEligible" checked> Eligible after S1 (no work exp / master needed)</label>
+      <label class="tog"><input type="checkbox" id="sOpen"> Open now only</label>
+      <label class="tog"><input type="checkbox" id="sHideIndo"> Hide Indonesia-funded (LPDP)</label>
+    </div>
+    <p class="sub" id="schNote"></p>
+    <div class="list" id="schList"></div>
+    <div class="card"><h3>Common documents to prepare</h3><p class="sub">Needed by almost every scholarship above. Tick what you already have (saved in this browser).</p><div class="checklist" id="schCommon"></div></div>
   </section>
 </div>
 
@@ -233,8 +273,140 @@ async function unlock(password, remember) {
     `<optgroup label="${esc(cat)}">${list.filter(s => counts[s]).map(s =>
       `<option value="${esc(s)}">${esc(s)} (${counts[s]})</option>`).join("")}</optgroup>`).join("");
   renderCoverage(data.coverage || {});
+  await loadScholarships();
   render();
 }
+
+// ── Scholarships tab: curated list in scholarships.json (public info, not encrypted).
+const SCH_STATUSES = ["new", "interested", "preparing", "applied", "accepted", "rejected", "skip"];
+const SCH_KEY = "jobboard.sch", DOCS_KEY = "jobboard.schdocs";
+let sch = {scholarships: [], common_documents: []};
+let schStatus = {}, schDocs = {};
+try { schStatus = JSON.parse(localStorage.getItem(SCH_KEY) || "{}"); schDocs = JSON.parse(localStorage.getItem(DOCS_KEY) || "{}"); } catch (e) {}
+const saveSch = () => { try { localStorage.setItem(SCH_KEY, JSON.stringify(schStatus)); localStorage.setItem(DOCS_KEY, JSON.stringify(schDocs)); } catch (e) {} };
+const schStatusOf = s => schStatus[s.id] || "new";
+const daysLeft = s => s.deadline ? Math.round((Date.parse(s.deadline) - Date.parse(today)) / 864e5) : null;
+const isOpen = s => s.deadline === null || daysLeft(s) >= 0;
+// Usable right after S1: no required work experience, and not a PhD that needs a master's first.
+const eligibleAfterS1 = s => !/^Minimal/i.test(s.work_exp || "") &&
+  !(s.levels.length === 1 && s.levels[0] === "S3" && !s.final_year_ok);
+
+async function loadScholarships() {
+  try {
+    const r = await fetch("scholarships.json", {cache: "no-store"});
+    if (r.ok) sch = await r.json();
+  } catch (e) {}
+  const cs = [...new Set(sch.scholarships.flatMap(s => s.countries))].sort();
+  $("sCountry").innerHTML = `<option value="">All countries</option>` + cs.map(c => `<option>${esc(c)}</option>`).join("");
+  renderCommonDocs();
+}
+
+function renderCommonDocs() {
+  const have = schDocs._common || {};
+  $("schCommon").innerHTML = sch.common_documents.map((d, i) =>
+    `<label><input type="checkbox" data-common="${i}" ${have[i] ? "checked" : ""}><span>${esc(d)}</span></label>`).join("");
+}
+
+function deadlineBox(s) {
+  const d = daysLeft(s);
+  if (d === null) return `<div class="dl open">rolling<small>always open</small></div>`;
+  const date = new Date(s.deadline + "T00:00:00").toLocaleDateString(undefined, {day: "numeric", month: "short", year: "2-digit"});
+  if (d < 0) return `<div class="dl" title="Closed: see next cycle">closed<small>${date}</small></div>`;
+  return `<div class="dl ${d <= 21 ? "soon" : "open"}" title="${s.deadline_confirmed ? "Confirmed deadline" : "Estimated deadline"}">${d}d${s.deadline_confirmed ? "" : "*"}<small>${date}</small></div>`;
+}
+
+function renderScholarships() {
+  const q = $("sq").value.toLowerCase().trim();
+  const list = sch.scholarships.filter(s => {
+    const st = schStatusOf(s);
+    if (q && !`${s.name} ${s.provider} ${s.countries.join(" ")} ${s.coverage} ${s.eligibility.join(" ")}`.toLowerCase().includes(q)) return false;
+    if ($("sRegion").value && !s.region.includes($("sRegion").value)) return false;
+    if ($("sCountry").value && !s.countries.includes($("sCountry").value)) return false;
+    if ($("sLevel").value && !s.levels.includes($("sLevel").value)) return false;
+    if ($("sFunding").value && s.funding !== $("sFunding").value) return false;
+    if ($("sStatus").value && st !== $("sStatus").value) return false;
+    if ($("sEligible").checked && !eligibleAfterS1(s)) return false;
+    if ($("sOpen").checked && !isOpen(s)) return false;
+    if ($("sHideIndo").checked && s.funded_by_indonesia) return false;
+    if (st === "skip" && $("sStatus").value !== "skip") return false;
+    return true;
+  }).sort((a, b) => {
+    // Open ones by nearest deadline, then rolling, then closed (most recently closed first).
+    const rank = s => s.deadline === null ? 1 : isOpen(s) ? 0 : 2;
+    return rank(a) - rank(b) || (rank(a) === 2 ? daysLeft(b) - daysLeft(a) : (daysLeft(a) ?? 0) - (daysLeft(b) ?? 0));
+  });
+
+  const open = sch.scholarships.filter(s => isOpen(s) && eligibleAfterS1(s));
+  $("stats").innerHTML = [
+    [list.length, "matching filters"],
+    [open.filter(s => s.deadline && daysLeft(s) <= 60).length, "closing in 60 days (eligible)"],
+    [sch.scholarships.filter(s => s.funding === "full").length, "fully funded"],
+    [sch.scholarships.filter(s => ["preparing", "applied"].includes(schStatusOf(s))).length, "preparing / applied"],
+    [sch.scholarships.filter(s => schStatusOf(s) === "accepted").length, "accepted"],
+  ].map(([n, l]) => `<div class="stat"><b>${n}</b><span>${l}</span></div>`).join("");
+  $("schNote").textContent = `${sch.scholarships.length} S2/S3 scholarships in Europe and China, checked ${sch.verified || "?"}. ` +
+    `* = estimated deadline from last year's cycle, always confirm on the official page. Closed ones show their next cycle.`;
+
+  if (!list.length) { $("schList").innerHTML = `<div class="empty">No scholarships match these filters.</div>`; return; }
+  $("schList").innerHTML = list.map(s => {
+    const st = schStatusOf(s);
+    const done = schDocs[s.id] || {};
+    const nDone = s.documents.filter((_, i) => done[i]).length;
+    const chips = [
+      ...s.levels.map(l => `<span class="chip">${l}</span>`),
+      `<span class="chip ${s.funding === "full" ? "good" : "warn"}">${s.funding === "full" ? "fully funded" : "partial"}</span>`,
+      s.final_year_ok ? `<span class="chip good">apply in final year</span>` : "",
+      /^Minimal/i.test(s.work_exp) ? `<span class="chip bad">${esc(s.work_exp.split(" ").slice(0, 4).join(" "))} work exp</span>` : "",
+      s.funded_by_indonesia ? `<span class="chip warn">Indonesia-funded</span>` : "",
+      !isOpen(s) ? `<span class="chip">next cycle</span>` : "",
+    ].join("");
+    const fact = (k, v) => v ? `<div><b>${k}</b>${esc(v)}</div>` : "";
+    return `<article class="job sch ${st === "skip" || st === "rejected" ? "dim" : ""}">
+      ${deadlineBox(s)}
+      <div>
+        <a class="title" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>
+        <div class="meta">${esc(s.provider)} · ${esc(s.countries.join(", "))} · intake ${esc(s.intake)}</div>
+        <div class="chips">${chips}</div>
+        <div class="meta" style="margin-top:6px">${esc(s.deadline_note)}</div>
+        <button class="more">Show requirements</button>
+        <span class="prog">· documents ${nDone}/${s.documents.length}</span>
+        <div class="req">
+          <div class="req-facts">
+            ${fact("Covers", s.coverage)}${fact("Language", s.language)}${fact("GPA", s.gpa)}
+            ${fact("Age", s.age)}${fact("Work experience", s.work_exp || "Not required")}
+          </div>
+          <div><h4>Eligibility</h4><ul>${s.eligibility.map(e => `<li>${esc(e)}</li>`).join("")}</ul></div>
+          <div><h4>Documents (tick when ready)</h4><div class="checklist">${s.documents.map((d, i) =>
+            `<label><input type="checkbox" data-sid="${esc(s.id)}" data-doc="${i}" ${done[i] ? "checked" : ""}><span>${esc(d)}</span></label>`).join("")}</div></div>
+          <div><h4>How to apply</h4><ol>${s.steps.map(e => `<li>${esc(e)}</li>`).join("")}</ol></div>
+          ${s.tips ? `<div class="tip">${esc(s.tips)}</div>` : ""}
+        </div>
+      </div>
+      <div class="side">
+        <a class="btn" href="${esc(s.url)}" target="_blank" rel="noopener">Official page ↗</a>
+        <select data-sid="${esc(s.id)}">${SCH_STATUSES.map(x => `<option ${x === st ? "selected" : ""}>${x}</option>`).join("")}</select>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+["sq","sRegion","sCountry","sLevel","sFunding","sStatus","sEligible","sOpen","sHideIndo"].forEach(id => $(id).addEventListener("input", render));
+$("panel-scholarships").addEventListener("change", e => {
+  const t = e.target;
+  if (t.matches("select[data-sid]")) { schStatus[t.dataset.sid] = t.value; saveSch(); render(); }
+  else if (t.matches("input[data-doc]")) {
+    (schDocs[t.dataset.sid] ||= {})[t.dataset.doc] = t.checked; saveSch();
+    const s = sch.scholarships.find(x => x.id === t.dataset.sid);
+    t.closest(".sch").querySelector(".prog").textContent = `· documents ${s.documents.filter((_, i) => schDocs[s.id][i]).length}/${s.documents.length}`;
+  }
+  else if (t.matches("input[data-common]")) { (schDocs._common ||= {})[t.dataset.common] = t.checked; saveSch(); }
+});
+$("schList").addEventListener("click", e => {
+  if (!e.target.matches(".more")) return;
+  const card = e.target.closest(".sch");
+  card.classList.toggle("open");
+  e.target.textContent = card.classList.contains("open") ? "Hide requirements" : "Show requirements";
+});
 
 // ── Tabs
 let activeTab = "jobs";
@@ -244,8 +416,8 @@ const skillsOf = j => j.skills ? j.skills.split(", ") : [];
 function showTab(name) {
   activeTab = name;
   document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.tab === name));
-  ["jobs", "skills", "coverage"].forEach(p => $("panel-" + p).hidden = p !== name);
-  $("filters").hidden = name === "coverage";
+  ["jobs", "skills", "coverage", "scholarships"].forEach(p => $("panel-" + p).hidden = p !== name);
+  $("filters").hidden = name === "coverage" || name === "scholarships";
   render();
 }
 document.querySelector(".tabs").addEventListener("click", e => {
@@ -386,6 +558,7 @@ if (storedPw()) unlock(storedPw(), false).catch(() => {
 ["q","country","work","skill","status","reloc","hideRestricted","hideSkipped"].forEach(id => $(id).addEventListener("input", render));
 
 function render() {
+  if (activeTab === "scholarships") return renderScholarships();
   const q = $("q").value.toLowerCase().trim();
   const passes = (j, ignoreSkill) => {
     const st = statusOf(j);

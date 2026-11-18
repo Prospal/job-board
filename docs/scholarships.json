@@ -1,0 +1,1374 @@
+{
+  "verified": "2026-11-18",
+  "note": "Daftar dikurasi manual. Deadline bertanda 'perkiraan' diambil dari pola siklus sebelumnya; selalu cek link resmi sebelum mendaftar.",
+  "common_documents": [
+    "Paspor (masa berlaku minimal 18 bulan dari tanggal mulai studi)",
+    "Ijazah + transkrip S1 dalam Bahasa Inggris (terjemahan penerjemah tersumpah), legalisir / Apostille (Kemenkumham) bila diminta",
+    "Surat Keterangan Lulus atau surat 'expected graduation' dari kampus (kalau daftar saat masih semester akhir)",
+    "Tes bahasa: IELTS Academic / TOEFL iBT (Eropa, umumnya IELTS 6.5) atau HSK (program berbahasa Mandarin)",
+    "CV (format Europass untuk Uni Eropa)",
+    "Motivation letter / Statement of Purpose, disesuaikan per program",
+    "2-3 surat rekomendasi (dosen pembimbing, dosen lain, atau atasan kerja)",
+    "Research proposal (wajib untuk S3, kadang untuk S2 China)",
+    "Sertifikat prestasi, publikasi, organisasi, pengalaman kerja/magang",
+    "Pas foto latar putih",
+    "Khusus China: Foreigner Physical Examination Form (cek kesehatan) dan SKCK (non-criminal record)"
+  ],
+  "scholarships": [
+    {
+      "id": "emjm",
+      "name": "Erasmus Mundus Joint Masters (EMJM)",
+      "provider": "Uni Eropa (EACEA)",
+      "region": "Europe",
+      "countries": [
+        "Multi-negara Uni Eropa"
+      ],
+      "levels": [
+        "S2"
+      ],
+      "funding": "full",
+      "coverage": "Biaya kuliah, tiket, visa, asuransi, tunjangan hidup ~€1.400/bulan. Kuliah di 2-3 negara berbeda.",
+      "deadline": "2027-01-15",
+      "deadline_confirmed": false,
+      "deadline_note": "Tiap program punya deadline sendiri, umumnya Oktober 2026 - Februari 2027 (beberapa sudah tutup 1 Nov / 1 Des).",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "Tidak ada batas",
+      "gpa": "Tergantung program, kompetitif ~3.3+/4.00",
+      "language": "IELTS 6.5 / TOEFL iBT 90 (sesuai program)",
+      "eligibility": [
+        "Sudah S1 atau sedang di tahun terakhir S1",
+        "Tidak tinggal di negara Uni Eropa lebih dari 12 bulan dalam 5 tahun terakhir",
+        "Belum pernah menerima beasiswa EMJM sebelumnya",
+        "Maksimal mendaftar ke 3 program EMJM per tahun"
+      ],
+      "documents": [
+        "Ijazah/SKL + transkrip",
+        "IELTS/TOEFL",
+        "CV Europass",
+        "Motivation letter",
+        "2 surat rekomendasi",
+        "Paspor",
+        "Bukti tempat tinggal (surat domisili) untuk syarat 12 bulan"
+      ],
+      "steps": [
+        "Cari program di katalog EMJM",
+        "Daftar langsung di website masing-masing program (tidak ada portal pusat)",
+        "Seleksi berkas, kadang interview",
+        "Pengumuman Maret-April"
+      ],
+      "tips": "Peluang terbesar untuk fresh graduate. Pilih 3 program yang paling cocok dengan jurusan S1 dan tulis motivation letter yang spesifik per program.",
+      "url": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en"
+    },
+    {
+      "id": "msca",
+      "name": "Marie Skłodowska-Curie Doctoral Networks (MSCA-DN)",
+      "provider": "Uni Eropa (Horizon Europe)",
+      "region": "Europe",
+      "countries": [
+        "Multi-negara Uni Eropa"
+      ],
+      "levels": [
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "Bukan beasiswa tapi posisi PhD bergaji (kontrak kerja): gaji ~€3.000+/bulan, tunjangan mobilitas & keluarga.",
+      "deadline": null,
+      "deadline_confirmed": false,
+      "deadline_note": "Rolling: tiap posisi punya deadline sendiri, dibuka sepanjang tahun di EURAXESS.",
+      "intake": "Bervariasi",
+      "work_exp": "",
+      "final_year_ok": false,
+      "age": "Tidak ada batas",
+      "gpa": "Kompetitif",
+      "language": "Bahasa Inggris (IELTS/TOEFL tergantung institusi)",
+      "eligibility": [
+        "Belum punya gelar doktor",
+        "Umumnya sudah S2 (beberapa negara menerima S1 + pengalaman riset)",
+        "Aturan mobilitas: tidak tinggal/bekerja di negara institusi tujuan lebih dari 12 bulan dalam 36 bulan terakhir"
+      ],
+      "documents": [
+        "Ijazah + transkrip S1 & S2",
+        "CV akademik",
+        "Cover letter / research statement",
+        "2-3 surat rekomendasi",
+        "IELTS/TOEFL"
+      ],
+      "steps": [
+        "Cari 'MSCA Doctoral Network' di EURAXESS Jobs",
+        "Lamar posisi seperti melamar kerja",
+        "Interview dengan supervisor/konsorsium"
+      ],
+      "tips": "Untuk nanti setelah S2. Simpan pencarian di EURAXESS dengan kata kunci bidang Anda.",
+      "url": "https://euraxess.ec.europa.eu/jobs/search"
+    },
+    {
+      "id": "daad-epos",
+      "name": "DAAD EPOS (Development-Related Postgraduate Courses)",
+      "provider": "DAAD",
+      "region": "Europe",
+      "countries": [
+        "Jerman"
+      ],
+      "levels": [
+        "S2"
+      ],
+      "funding": "full",
+      "coverage": "€992/bulan, asuransi, tiket, tunjangan riset & kursus Bahasa Jerman.",
+      "deadline": "2026-10-15",
+      "deadline_confirmed": false,
+      "deadline_note": "Deadline per program (banyak di 15 Oktober / 31 Oktober). Siklus berikut sekitar Agustus-Oktober 2027.",
+      "intake": "Oktober 2027 (siklus ini) / 2028",
+      "work_exp": "Minimal 2 tahun pengalaman kerja relevan",
+      "final_year_ok": false,
+      "age": "Gelar S1 tidak lebih dari 6 tahun",
+      "gpa": "Kompetitif, umumnya top ~30% angkatan",
+      "language": "IELTS 6.0-6.5 / TOEFL; Jerman untuk program berbahasa Jerman",
+      "eligibility": [
+        "S1 dari bidang relevan dengan program EPOS",
+        "2 tahun pengalaman kerja setelah lulus",
+        "Bekerja di bidang terkait pembangunan"
+      ],
+      "documents": [
+        "Formulir DAAD",
+        "CV Europass bertanda tangan",
+        "Motivation letter (bertanda tangan)",
+        "Surat rekomendasi akademik",
+        "Surat keterangan kerja dari kantor",
+        "Ijazah + transkrip",
+        "Sertifikat bahasa"
+      ],
+      "steps": [
+        "Pilih program di daftar EPOS",
+        "Kirim berkas langsung ke kampus (bukan ke DAAD)",
+        "Kampus menyeleksi lalu merekomendasikan ke DAAD"
+      ],
+      "tips": "Belum bisa untuk sekarang (butuh 2 tahun kerja). Simpan untuk 2-3 tahun ke depan.",
+      "url": "https://www2.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/"
+    },
+    {
+      "id": "daad-hsp",
+      "name": "DAAD Helmut-Schmidt-Programme (Public Policy & Good Governance)",
+      "provider": "DAAD",
+      "region": "Europe",
+      "countries": [
+        "Jerman"
+      ],
+      "levels": [
+        "S2"
+      ],
+      "funding": "full",
+      "coverage": "€992/bulan, asuransi, tiket, kursus Bahasa Jerman 6 bulan sebelum kuliah.",
+      "deadline": "2026-07-31",
+      "deadline_confirmed": true,
+      "deadline_note": "Siklus 2027 sudah tutup. Siklus berikut perkiraan dibuka Mei-Juli 2027.",
+      "intake": "Oktober 2028 (siklus berikutnya)",
+      "work_exp": "Pengalaman kerja/organisasi diutamakan (tidak selalu wajib)",
+      "final_year_ok": false,
+      "age": "Gelar S1 tidak lebih dari 6 tahun",
+      "gpa": "Kompetitif",
+      "language": "IELTS 6.5 / TOEFL iBT 88",
+      "eligibility": [
+        "S1 bidang hukum, ekonomi, ilmu politik, administrasi publik, sosial",
+        "Indonesia termasuk negara yang memenuhi syarat",
+        "Komitmen terhadap tata kelola dan demokrasi"
+      ],
+      "documents": [
+        "Formulir DAAD online",
+        "CV Europass",
+        "Motivation letter",
+        "Surat rekomendasi",
+        "Ijazah + transkrip",
+        "Sertifikat bahasa"
+      ],
+      "steps": [
+        "Pilih maksimal 3 program HSP",
+        "Daftar via portal DAAD",
+        "Seleksi oleh komisi DAAD & kampus"
+      ],
+      "tips": "Cocok kalau S1 Anda di bidang sosial/hukum/ekonomi. Mulai siapkan IELTS sekarang untuk siklus Juli 2027.",
+      "url": "https://www2.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/"
+    },
+    {
+      "id": "daad-phd",
+      "name": "DAAD Research Grants - Doctoral Programmes in Germany",
+      "provider": "DAAD",
+      "region": "Europe",
+      "countries": [
+        "Jerman"
+      ],
+      "levels": [
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "€1.300/bulan, asuransi, tiket, tunjangan riset, tunjangan keluarga.",
+      "deadline": "2026-10-21",
+      "deadline_confirmed": false,
+      "deadline_note": "Untuk Indonesia biasanya Oktober (kadang ada putaran April). Siklus berikut sekitar Oktober 2027.",
+      "intake": "2027/2028",
+      "work_exp": "",
+      "final_year_ok": false,
+      "age": "Gelar S2 tidak lebih dari 6 tahun",
+      "gpa": "Kompetitif",
+      "language": "Bahasa Inggris atau Jerman sesuai supervisor",
+      "eligibility": [
+        "Sudah S2",
+        "Punya surat kesediaan supervisor (Betreuungszusage) di Jerman",
+        "Research proposal yang jelas"
+      ],
+      "documents": [
+        "Research proposal",
+        "Surat kesediaan supervisor Jerman",
+        "CV",
+        "Rekomendasi akademik",
+        "Ijazah + transkrip S1 & S2",
+        "Timeline riset"
+      ],
+      "steps": [
+        "Cari supervisor & hubungi via email",
+        "Dapatkan letter of supervision",
+        "Daftar via portal DAAD"
+      ],
+      "tips": "Untuk setelah S2.",
+      "url": "https://www.daad-indonesia.org/en/"
+    },
+    {
+      "id": "boell",
+      "name": "Heinrich Böll Foundation Scholarship",
+      "provider": "Heinrich-Böll-Stiftung",
+      "region": "Europe",
+      "countries": [
+        "Jerman"
+      ],
+      "levels": [
+        "S2",
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "S2: €992/bulan + tunjangan; S3: €1.450/bulan + tunjangan riset.",
+      "deadline": "2027-03-01",
+      "deadline_confirmed": false,
+      "deadline_note": "Dua putaran per tahun: 1 Maret dan 1 September.",
+      "intake": "Semester berikutnya",
+      "work_exp": "",
+      "final_year_ok": false,
+      "age": "Tidak ada batas tegas",
+      "gpa": "Prestasi akademik baik",
+      "language": "Jerman sangat dianjurkan; program berbahasa Inggris bisa diterima",
+      "eligibility": [
+        "Sudah diterima / terdaftar di kampus Jerman",
+        "Aktif di kegiatan sosial/politik (nilai: ekologi, demokrasi, HAM)"
+      ],
+      "documents": [
+        "Surat penerimaan kampus Jerman",
+        "Motivation letter",
+        "CV",
+        "Bukti keterlibatan sosial",
+        "Surat rekomendasi dosen",
+        "Ijazah + transkrip"
+      ],
+      "steps": [
+        "Daftar kampus Jerman dulu",
+        "Isi aplikasi online Böll",
+        "Seleksi berkas + wawancara"
+      ],
+      "tips": "Kombinasi bagus dengan kampus Jerman tanpa biaya kuliah. Butuh rekam jejak aktivisme/organisasi.",
+      "url": "https://www.boell.de/en/scholarships"
+    },
+    {
+      "id": "kas",
+      "name": "Konrad-Adenauer-Stiftung (KAS) - International Students",
+      "provider": "Konrad-Adenauer-Stiftung",
+      "region": "Europe",
+      "countries": [
+        "Jerman"
+      ],
+      "levels": [
+        "S2",
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "Tunjangan bulanan, asuransi, seminar & mentoring.",
+      "deadline": "2027-01-15",
+      "deadline_confirmed": false,
+      "deadline_note": "Biasanya 15 Januari dan 15 Juli.",
+      "intake": "Semester berikutnya",
+      "work_exp": "",
+      "final_year_ok": false,
+      "age": "Biasanya di bawah 30 (S2)",
+      "gpa": "Di atas rata-rata",
+      "language": "Pengetahuan Bahasa Jerman diharapkan",
+      "eligibility": [
+        "Prestasi akademik",
+        "Keterlibatan sosial/politik",
+        "Nilai demokrasi Kristen-sosial"
+      ],
+      "documents": [
+        "CV",
+        "Motivation letter",
+        "Rekomendasi",
+        "Ijazah + transkrip",
+        "Sertifikat Bahasa Jerman"
+      ],
+      "steps": [
+        "Cek kantor KAS Indonesia",
+        "Aplikasi online",
+        "Wawancara"
+      ],
+      "tips": "Lebih cocok kalau Anda mulai belajar Bahasa Jerman.",
+      "url": "https://www.kas.de/en/web/begabtenfoerderung-und-kultur/foreign-students"
+    },
+    {
+      "id": "si-sisgp",
+      "name": "Swedish Institute Scholarships for Global Professionals (SISGP)",
+      "provider": "Swedish Institute",
+      "region": "Europe",
+      "countries": [
+        "Swedia"
+      ],
+      "levels": [
+        "S2"
+      ],
+      "funding": "full",
+      "coverage": "Biaya kuliah, SEK 12.000/bulan, tunjangan perjalanan, asuransi, jaringan SI.",
+      "deadline": "2027-01-15",
+      "deadline_confirmed": true,
+      "deadline_note": "15 Jan 2027 = daftar program di universityadmissions.se. Aplikasi beasiswa SI sekitar Februari 2027.",
+      "intake": "Agustus 2027",
+      "work_exp": "Minimal 3.000 jam pengalaman kerja + pengalaman kepemimpinan",
+      "final_year_ok": false,
+      "age": "Tidak ada batas",
+      "gpa": "Kompetitif",
+      "language": "Sesuai syarat program (IELTS 6.5 umum)",
+      "eligibility": [
+        "Warga negara Indonesia (termasuk negara yang memenuhi syarat)",
+        "3.000 jam kerja (magang tidak dihitung)",
+        "Pengalaman kepemimpinan",
+        "Program termasuk daftar yang disetujui SI"
+      ],
+      "documents": [
+        "Aplikasi universityadmissions.se",
+        "Ijazah + transkrip",
+        "Sertifikat bahasa",
+        "CV SI",
+        "Motivation letter SI",
+        "Surat referensi kerja & kepemimpinan"
+      ],
+      "steps": [
+        "Daftar program (deadline 15 Jan)",
+        "Daftar beasiswa SI (Feb)",
+        "Pengumuman April"
+      ],
+      "tips": "Belum memenuhi syarat 3.000 jam kerja. Simpan untuk nanti.",
+      "url": "https://si.se/en/apply/scholarships/swedish-institute-scholarships-for-global-professionals/"
+    },
+    {
+      "id": "sh",
+      "name": "Stipendium Hungaricum",
+      "provider": "Pemerintah Hungaria (Tempus Public Foundation)",
+      "region": "Europe",
+      "countries": [
+        "Hungaria"
+      ],
+      "levels": [
+        "S2",
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "Bebas biaya kuliah, tunjangan HUF 43.700/bulan (S2) atau HUF 140.000-180.000 (S3), asrama/tunjangan tempat tinggal, asuransi.",
+      "deadline": "2027-01-15",
+      "deadline_confirmed": false,
+      "deadline_note": "Perkiraan 15 Jan 2027 14:00 CET (pola siklus lalu). Kemdiktisaintek bisa punya deadline internal lebih awal.",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "Tidak ada batas",
+      "gpa": "Sesuai syarat kampus",
+      "language": "IELTS 5.5-6.5 tergantung program",
+      "eligibility": [
+        "Warga Indonesia (negara mitra)",
+        "Dinominasikan oleh Kemdiktisaintek",
+        "Maks 2 pilihan program"
+      ],
+      "documents": [
+        "Ijazah/SKL + transkrip (Inggris)",
+        "Sertifikat bahasa",
+        "Motivation letter",
+        "CV",
+        "Surat keterangan kesehatan",
+        "Paspor",
+        "Rekomendasi (S3 wajib) + research plan (S3)"
+      ],
+      "steps": [
+        "Daftar di apply.stipendiumhungaricum.hu",
+        "Nominasi oleh Kemdiktisaintek",
+        "Tes / wawancara kampus",
+        "Pengumuman Mei-Juni"
+      ],
+      "tips": "Sangat cocok untuk fresh graduate. Bisa daftar saat semester akhir.",
+      "url": "https://stipendiumhungaricum.hu/"
+    },
+    {
+      "id": "eiffel",
+      "name": "Eiffel Excellence Scholarship",
+      "provider": "Kementerian Luar Negeri Prancis (Campus France)",
+      "region": "Europe",
+      "countries": [
+        "Prancis"
+      ],
+      "levels": [
+        "S2",
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "S2: €1.181/bulan; S3: €1.700/bulan; tiket, asuransi, kegiatan budaya. Biaya kuliah tidak termasuk.",
+      "deadline": "2027-01-08",
+      "deadline_confirmed": false,
+      "deadline_note": "Kampus Prancis yang mengajukan Anda ke Campus France (sekitar awal Januari). Deadline internal kampus lebih awal (Nov-Des).",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "S2: maks 30 tahun; S3: maks 35 tahun",
+      "gpa": "Sangat kompetitif",
+      "language": "Prancis atau Inggris sesuai program",
+      "eligibility": [
+        "Tidak bisa daftar langsung: harus via kampus Prancis",
+        "Bidang: teknik, sains, ekonomi, hukum, politik",
+        "S3: program cotutelle/co-supervision"
+      ],
+      "documents": [
+        "Aplikasi kampus Prancis",
+        "Ijazah + transkrip",
+        "Motivation letter",
+        "CV",
+        "Rekomendasi",
+        "Sertifikat bahasa"
+      ],
+      "steps": [
+        "Daftar ke program master Prancis (Nov-Des)",
+        "Minta kampus mengajukan Anda untuk Eiffel",
+        "Pengumuman Maret"
+      ],
+      "tips": "Tanyakan ke kampus tujuan sejak November apakah mereka mengusulkan kandidat Eiffel.",
+      "url": "https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence"
+    },
+    {
+      "id": "maeci",
+      "name": "Italian Government Scholarships (MAECI)",
+      "provider": "Kementerian Luar Negeri Italia",
+      "region": "Europe",
+      "countries": [
+        "Italia"
+      ],
+      "levels": [
+        "S2",
+        "S3"
+      ],
+      "funding": "partial",
+      "coverage": "€900/bulan (9 bulan per tahun akademik), bebas biaya kuliah di banyak kampus, asuransi kesehatan.",
+      "deadline": "2027-03-26",
+      "deadline_confirmed": false,
+      "deadline_note": "Siklus lalu tutup 26 Maret 2026. Panggilan 2027/28 perkiraan dibuka Februari-Maret 2027.",
+      "intake": "September/Oktober 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "Ada batas usia (cek panggilan terbaru)",
+      "gpa": "Prestasi akademik baik",
+      "language": "Italia atau Inggris sesuai program",
+      "eligibility": [
+        "Warga Indonesia termasuk negara yang ditawarkan",
+        "Daftar ke program kampus Italia"
+      ],
+      "documents": [
+        "Aplikasi Study in Italy",
+        "Ijazah + transkrip",
+        "Sertifikat bahasa",
+        "Surat penerimaan / pendaftaran kampus Italia"
+      ],
+      "steps": [
+        "Daftar ke kampus Italia",
+        "Daftar beasiswa di portal Study in Italy",
+        "Pengumuman Juni-Juli"
+      ],
+      "tips": "Bisa digabung dengan beasiswa regional (DSU) di Italia yang membebaskan biaya kuliah.",
+      "url": "https://studyinitaly.esteri.it/"
+    },
+    {
+      "id": "ernst-mach",
+      "name": "Ernst Mach Grant - ASEA-UNINET (Full PhD)",
+      "provider": "OeAD (Austria)",
+      "region": "Europe",
+      "countries": [
+        "Austria"
+      ],
+      "levels": [
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "Tunjangan ~€1.300/bulan selama 36 bulan, bebas biaya kuliah, asuransi.",
+      "deadline": "2027-03-01",
+      "deadline_confirmed": false,
+      "deadline_note": "Dari pengumuman ITS untuk siklus 2027/28; konfirmasi di scholarships.at.",
+      "intake": "Oktober 2027",
+      "work_exp": "",
+      "final_year_ok": false,
+      "age": "Maksimal 35 tahun",
+      "gpa": "Kompetitif",
+      "language": "Inggris / Jerman",
+      "eligibility": [
+        "Warga Indonesia",
+        "Sudah S2",
+        "Supervisor di kampus anggota ASEA-UNINET di Austria",
+        "Biasanya dosen/staf kampus Indonesia anggota ASEA-UNINET"
+      ],
+      "documents": [
+        "Research proposal",
+        "Surat kesediaan supervisor Austria",
+        "CV",
+        "Ijazah + transkrip",
+        "Rekomendasi"
+      ],
+      "steps": [
+        "Cari supervisor Austria",
+        "Daftar di scholarships.at"
+      ],
+      "tips": "Untuk setelah S2.",
+      "url": "https://asea-uninet.org/scholarships-grants/ernst-mach-grant-emg/"
+    },
+    {
+      "id": "eskas",
+      "name": "Swiss Government Excellence Scholarships (ESKAS)",
+      "provider": "Pemerintah Swiss (SBFI)",
+      "region": "Europe",
+      "countries": [
+        "Swiss"
+      ],
+      "levels": [
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "CHF 2.450/bulan, bebas biaya kuliah, asuransi kesehatan, tunjangan perumahan.",
+      "deadline": "2026-11-30",
+      "deadline_confirmed": false,
+      "deadline_note": "Untuk Indonesia dilaporkan 20 Agu - 30 Nov 2026. Konfirmasi di daftar per negara SBFI / Kedubes Swiss Jakarta.",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": false,
+      "age": "Lahir setelah 31 Desember 1991",
+      "gpa": "Sangat kompetitif",
+      "language": "Inggris / bahasa supervisor",
+      "eligibility": [
+        "Sudah S2",
+        "Surat dukungan supervisor di kampus Swiss",
+        "Research proposal"
+      ],
+      "documents": [
+        "Research proposal",
+        "Surat supervisor Swiss",
+        "CV",
+        "2 rekomendasi",
+        "Ijazah + transkrip"
+      ],
+      "steps": [
+        "Hubungi supervisor Swiss",
+        "Daftar via Kedubes Swiss"
+      ],
+      "tips": "Untuk setelah S2.",
+      "url": "https://www.sbfi.admin.ch/scholarships_eng"
+    },
+    {
+      "id": "eth-esop",
+      "name": "ETH Zurich Excellence Scholarship & Opportunity Programme (ESOP)",
+      "provider": "ETH Zurich",
+      "region": "Europe",
+      "countries": [
+        "Swiss"
+      ],
+      "levels": [
+        "S2"
+      ],
+      "funding": "full",
+      "coverage": "CHF 12.000 per semester untuk hidup + pembebasan biaya kuliah.",
+      "deadline": "2026-12-15",
+      "deadline_confirmed": false,
+      "deadline_note": "Periode aplikasi master ETH biasanya 1 Nov - 15 Des.",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "Tidak ada batas",
+      "gpa": "Top 10% angkatan",
+      "language": "IELTS 7.0 / TOEFL iBT 100",
+      "eligibility": [
+        "Sangat berprestasi (top 10%)",
+        "Daftar master ETH bersamaan dengan beasiswa"
+      ],
+      "documents": [
+        "Aplikasi master ETH",
+        "Proposal riset singkat",
+        "2 rekomendasi",
+        "CV",
+        "Transkrip",
+        "Sertifikat bahasa"
+      ],
+      "steps": [
+        "Daftar master ETH + ESOP sekaligus sebelum 15 Des"
+      ],
+      "tips": "Sangat kompetitif tapi bisa untuk fresh graduate dengan IPK sangat tinggi.",
+      "url": "https://ethz.ch/en/studies/financial/scholarships/excellencescholarship.html"
+    },
+    {
+      "id": "tudelft",
+      "name": "TU Delft Justus & Louise van Effen Excellence Scholarship",
+      "provider": "TU Delft",
+      "region": "Europe",
+      "countries": [
+        "Belanda"
+      ],
+      "levels": [
+        "S2"
+      ],
+      "funding": "full",
+      "coverage": "Biaya kuliah penuh + tunjangan hidup €1.100/bulan.",
+      "deadline": "2026-12-01",
+      "deadline_confirmed": false,
+      "deadline_note": "Harus daftar program master + beasiswa sebelum ~1 Desember.",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "Tidak ada batas",
+      "gpa": "IPK ≥ 80% dari skala (≈3.5/4.00)",
+      "language": "IELTS 6.5 (min 6.0 per band)",
+      "eligibility": [
+        "Mahasiswa non-EEA",
+        "Prestasi akademik luar biasa"
+      ],
+      "documents": [
+        "Aplikasi master TU Delft",
+        "Essay beasiswa",
+        "CV",
+        "Transkrip",
+        "Rekomendasi",
+        "IELTS/TOEFL"
+      ],
+      "steps": [
+        "Daftar master di Studielink + TU Delft",
+        "Kirim aplikasi beasiswa sebelum deadline"
+      ],
+      "tips": "Deadline sangat dekat. Cek apakah IELTS sudah siap.",
+      "url": "https://www.tudelft.nl/en/education/practical-matters/scholarships/justus-louise-van-effen-excellence-scholarships"
+    },
+    {
+      "id": "uva-aes",
+      "name": "Amsterdam Excellence Scholarship (AES)",
+      "provider": "University of Amsterdam",
+      "region": "Europe",
+      "countries": [
+        "Belanda"
+      ],
+      "levels": [
+        "S2"
+      ],
+      "funding": "full",
+      "coverage": "€25.000 per tahun (biaya kuliah + hidup).",
+      "deadline": "2027-01-15",
+      "deadline_confirmed": false,
+      "deadline_note": "Perkiraan; daftar master UvA sebelum deadline AES program.",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "Tidak ada batas",
+      "gpa": "Top 10%",
+      "language": "IELTS 6.5-7.0",
+      "eligibility": [
+        "Non-EU",
+        "Top 10% angkatan",
+        "Program master yang ikut skema AES"
+      ],
+      "documents": [
+        "Aplikasi master UvA",
+        "Essay AES",
+        "Rekomendasi",
+        "Transkrip",
+        "CV"
+      ],
+      "steps": [
+        "Daftar master + AES bersamaan",
+        "Pengumuman April"
+      ],
+      "tips": "Hanya beberapa program yang ikut AES: cek daftar program.",
+      "url": "https://www.uva.nl/en/education/fees-and-funding/scholarships-and-loans/amsterdam-excellence-scholarships/amsterdam-excellence-scholarships.html"
+    },
+    {
+      "id": "leiden-lexs",
+      "name": "Leiden Excellence Scholarship (LExS)",
+      "provider": "Leiden University",
+      "region": "Europe",
+      "countries": [
+        "Belanda"
+      ],
+      "levels": [
+        "S2"
+      ],
+      "funding": "partial",
+      "coverage": "Potongan biaya kuliah €10.000 / €15.000 / biaya kuliah penuh dikurangi tuition statutori.",
+      "deadline": "2027-02-01",
+      "deadline_confirmed": false,
+      "deadline_note": "Perkiraan 1 Feb (kadang 1 Maret per fakultas).",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "Tidak ada batas",
+      "gpa": "Top 10%",
+      "language": "IELTS 6.5",
+      "eligibility": [
+        "Non-EEA",
+        "Top 10% angkatan"
+      ],
+      "documents": [
+        "Aplikasi master Leiden",
+        "Motivation letter",
+        "Transkrip",
+        "CV"
+      ],
+      "steps": [
+        "Daftar master Leiden",
+        "Pilih LExS di formulir"
+      ],
+      "tips": "Parsial: perlu sumber dana hidup lain.",
+      "url": "https://www.universiteitleiden.nl/en/scholarships/sea/leiden-excellence-scholarship-lexs"
+    },
+    {
+      "id": "holland",
+      "name": "Holland Scholarship",
+      "provider": "Kementerian Pendidikan Belanda + kampus",
+      "region": "Europe",
+      "countries": [
+        "Belanda"
+      ],
+      "levels": [
+        "S2"
+      ],
+      "funding": "partial",
+      "coverage": "€5.000 sekali, di tahun pertama.",
+      "deadline": "2027-02-01",
+      "deadline_confirmed": false,
+      "deadline_note": "Umumnya 1 Februari atau 1 Mei, tergantung kampus.",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "Tidak ada batas",
+      "gpa": "Sesuai kampus",
+      "language": "IELTS 6.5",
+      "eligibility": [
+        "Non-EEA",
+        "Belum pernah kuliah di Belanda"
+      ],
+      "documents": [
+        "Aplikasi master",
+        "Motivation letter beasiswa"
+      ],
+      "steps": [
+        "Daftar master di kampus peserta",
+        "Ajukan Holland Scholarship ke kampus"
+      ],
+      "tips": "Hanya tambahan dana: kombinasikan dengan LPDP atau tabungan.",
+      "url": "https://www.studyinnl.org/finances/holland-scholarship"
+    },
+    {
+      "id": "chevening",
+      "name": "Chevening Scholarship",
+      "provider": "Pemerintah Inggris (FCDO)",
+      "region": "Europe",
+      "countries": [
+        "Inggris"
+      ],
+      "levels": [
+        "S2"
+      ],
+      "funding": "full",
+      "coverage": "Biaya kuliah, tunjangan hidup bulanan, tiket PP, visa.",
+      "deadline": "2026-10-06",
+      "deadline_confirmed": true,
+      "deadline_note": "Siklus 2027/28 sudah tutup. Siklus berikut dibuka ~Agustus 2027, tutup ~awal Oktober 2027.",
+      "intake": "September 2028 (siklus berikutnya)",
+      "work_exp": "Minimal 2 tahun (2.800 jam) pengalaman kerja",
+      "final_year_ok": false,
+      "age": "Tidak ada batas",
+      "gpa": "Ijazah S1 setara UK 2:1",
+      "language": "Sesuai syarat kampus (IELTS 6.5 umum)",
+      "eligibility": [
+        "Warga Indonesia",
+        "2.800 jam kerja",
+        "Daftar ke 3 program master UK",
+        "Bersedia kembali ke Indonesia minimal 2 tahun"
+      ],
+      "documents": [
+        "4 essay (leadership, networking, studying in UK, career plan)",
+        "2 surat rekomendasi",
+        "Ijazah + transkrip",
+        "Paspor",
+        "Unconditional offer (paling lambat Juli)"
+      ],
+      "steps": [
+        "Aplikasi online (Agu-Okt)",
+        "Shortlist Feb",
+        "Wawancara Mar-Apr di Jakarta",
+        "Hasil Juni"
+      ],
+      "tips": "Belum bisa sekarang (perlu 2 tahun kerja). Simpan untuk nanti.",
+      "url": "https://www.chevening.org/scholarships/"
+    },
+    {
+      "id": "great",
+      "name": "GREAT Scholarships Indonesia",
+      "provider": "British Council + kampus UK",
+      "region": "Europe",
+      "countries": [
+        "Inggris"
+      ],
+      "levels": [
+        "S2"
+      ],
+      "funding": "partial",
+      "coverage": "Potongan biaya kuliah minimal £10.000.",
+      "deadline": "2027-04-30",
+      "deadline_confirmed": false,
+      "deadline_note": "Per kampus, umumnya April-Juni 2027 (contoh Southampton 30 Apr 2027).",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "Tidak ada batas",
+      "gpa": "Sesuai kampus",
+      "language": "IELTS 6.5",
+      "eligibility": [
+        "Warga Indonesia berdomisili di Indonesia",
+        "Master taught full-time 1 tahun"
+      ],
+      "documents": [
+        "Offer letter kampus UK",
+        "Essay beasiswa",
+        "Transkrip",
+        "IELTS"
+      ],
+      "steps": [
+        "Dapatkan offer dari kampus peserta",
+        "Daftar GREAT di kampus tersebut"
+      ],
+      "tips": "Parsial: biasanya dikombinasikan dengan dana pribadi/LPDP.",
+      "url": "https://www.britishcouncil.id/en/study-uk/great-scholarships-indonesia"
+    },
+    {
+      "id": "gates",
+      "name": "Gates Cambridge Scholarship",
+      "provider": "University of Cambridge",
+      "region": "Europe",
+      "countries": [
+        "Inggris"
+      ],
+      "levels": [
+        "S2",
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "Biaya kuliah, £21.000+/tahun, tiket, visa, tunjangan keluarga.",
+      "deadline": "2027-01-07",
+      "deadline_confirmed": false,
+      "deadline_note": "Ikut deadline course Cambridge (Desember atau awal Januari). Perkiraan.",
+      "intake": "Oktober 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "Tidak ada batas",
+      "gpa": "Sangat tinggi (top 5%)",
+      "language": "IELTS 7.5",
+      "eligibility": [
+        "Non-UK",
+        "Daftar course pascasarjana Cambridge full-time",
+        "Centang Gates di formulir"
+      ],
+      "documents": [
+        "Aplikasi Cambridge",
+        "Gates statement",
+        "Rekomendasi (termasuk referensi Gates)",
+        "Transkrip",
+        "CV"
+      ],
+      "steps": [
+        "Daftar course + centang Gates",
+        "Shortlist & wawancara Feb-Mar"
+      ],
+      "tips": "Sangat kompetitif. Bagus kalau punya riset/publikasi saat S1.",
+      "url": "https://www.gatescambridge.org/"
+    },
+    {
+      "id": "clarendon",
+      "name": "Clarendon Fund Scholarship",
+      "provider": "University of Oxford",
+      "region": "Europe",
+      "countries": [
+        "Inggris"
+      ],
+      "levels": [
+        "S2",
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "Biaya kuliah + tunjangan hidup penuh.",
+      "deadline": "2027-01-07",
+      "deadline_confirmed": false,
+      "deadline_note": "Otomatis dipertimbangkan kalau daftar course Oxford sebelum deadline Desember/Januari.",
+      "intake": "Oktober 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "Tidak ada batas",
+      "gpa": "Sangat tinggi",
+      "language": "IELTS 7.0-7.5",
+      "eligibility": [
+        "Daftar course pascasarjana Oxford sebelum deadline beasiswa"
+      ],
+      "documents": [
+        "Aplikasi Oxford",
+        "Statement of purpose",
+        "3 rekomendasi",
+        "Transkrip",
+        "CV"
+      ],
+      "steps": [
+        "Daftar course Oxford (tidak ada formulir terpisah)"
+      ],
+      "tips": "Tidak ada aplikasi terpisah, cukup daftar course lebih awal.",
+      "url": "https://www.ox.ac.uk/clarendon"
+    },
+    {
+      "id": "goi-ies",
+      "name": "Government of Ireland International Education Scholarship (GOI-IES)",
+      "provider": "Higher Education Authority Irlandia",
+      "region": "Europe",
+      "countries": [
+        "Irlandia"
+      ],
+      "levels": [
+        "S2",
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "€10.000 tunjangan + pembebasan biaya kuliah, 1 tahun.",
+      "deadline": "2026-10-10",
+      "deadline_confirmed": false,
+      "deadline_note": "Siklus 2027/28 dilaporkan tutup ~Oktober 2026. Cek siklus berikutnya.",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "Tidak ada batas",
+      "gpa": "Sangat tinggi",
+      "language": "IELTS 6.5",
+      "eligibility": [
+        "Non-EU",
+        "Daftar ke kampus Irlandia peserta"
+      ],
+      "documents": [
+        "Offer/aplikasi kampus Irlandia",
+        "Essay",
+        "Rekomendasi",
+        "Transkrip"
+      ],
+      "steps": [
+        "Daftar kampus Irlandia",
+        "Aplikasi online HEA"
+      ],
+      "tips": "Cek tanggal siklus berikutnya pada musim panas 2027.",
+      "url": "https://hea.ie/policy/internationalisation/goi-ies/"
+    },
+    {
+      "id": "lpdp",
+      "name": "Beasiswa LPDP (Luar Negeri)",
+      "provider": "LPDP, Kementerian Keuangan RI",
+      "region": "Europe & China",
+      "countries": [
+        "Kampus tujuan LPDP di Eropa & China"
+      ],
+      "levels": [
+        "S2",
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "Biaya kuliah, tunjangan hidup, tiket, visa, asuransi, dana buku & riset.",
+      "deadline": "2027-02-23",
+      "deadline_confirmed": false,
+      "deadline_note": "Dana dari Indonesia, untuk studi di luar negeri. Tahap 1 2027 diperkirakan akhir Jan - akhir Feb (pola 2026: 22 Jan - 23 Feb).",
+      "intake": "2027/2028",
+      "work_exp": "",
+      "final_year_ok": false,
+      "age": "S2 maks 35 tahun, S3 maks 40 tahun",
+      "gpa": "S2: IPK S1 ≥ 3.00; S3: IPK S2 ≥ 3.25",
+      "language": "Luar negeri: IELTS 6.5 / TOEFL iBT 80 (S2); IELTS 7.0 / iBT 94 (S3); atau HSK untuk China",
+      "eligibility": [
+        "WNI",
+        "Sudah lulus S1 (ijazah keluar)",
+        "Kampus tujuan ada di daftar LPDP",
+        "Wajib kembali & mengabdi di Indonesia (2n+1)"
+      ],
+      "documents": [
+        "KTP",
+        "Ijazah + transkrip",
+        "Sertifikat bahasa",
+        "LoA (bila sudah ada)",
+        "Essay 'Kontribusiku bagi Indonesia'",
+        "Rencana studi",
+        "Surat rekomendasi",
+        "Surat pernyataan"
+      ],
+      "steps": [
+        "Daftar di portal LPDP",
+        "Seleksi administrasi",
+        "Tes bakat skolastik",
+        "Wawancara",
+        "Persiapan Keberangkatan (PK)"
+      ],
+      "tips": "Bukan beasiswa 'di Indonesia', tapi dari Indonesia untuk kuliah di Eropa/China. Butuh ijazah S1 sudah keluar. Hapus di filter kalau tidak diinginkan.",
+      "url": "https://lpdp.kemenkeu.go.id/",
+      "funded_by_indonesia": true
+    },
+    {
+      "id": "csc-a",
+      "name": "Chinese Government Scholarship - Type A (via Kedubes RRT Jakarta)",
+      "provider": "China Scholarship Council (CSC)",
+      "region": "China",
+      "countries": [
+        "China"
+      ],
+      "levels": [
+        "S2",
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "Bebas biaya kuliah, asrama, asuransi, tunjangan CNY 3.000/bulan (S2) atau CNY 3.500 (S3).",
+      "deadline": "2027-02-14",
+      "deadline_confirmed": true,
+      "deadline_note": "Pengumuman resmi Kedubes RRT Jakarta 27 Okt 2026: submit online di campuschina.org sebelum 14 Feb 2027. Hasil Juli-Agustus 2027.",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "S2 di bawah 35 tahun; S3 di bawah 40 tahun",
+      "gpa": "Sesuai syarat kampus",
+      "language": "Program Inggris: IELTS/TOEFL; program Mandarin: HSK 4-5",
+      "eligibility": [
+        "WNI, sehat",
+        "S2: punya gelar S1 (atau lulus sebelum Agustus 2027); S3: punya gelar S2",
+        "Pre-admission letter dari kampus China",
+        "Kuota terbatas (jalur kedubes)"
+      ],
+      "documents": [
+        "Formulir CSC online",
+        "Paspor",
+        "Ijazah/SKL + transkrip (notaris)",
+        "Study plan (S2 ≥ 800 kata) / research proposal (S3 ≥ 1.500 kata)",
+        "2 rekomendasi dari profesor/associate professor",
+        "Pre-admission letter",
+        "Foreigner Physical Examination Form",
+        "SKCK",
+        "Sertifikat bahasa"
+      ],
+      "steps": [
+        "Hubungi kampus China & dapatkan pre-admission letter",
+        "Isi aplikasi di campuschina.org (Agency No. kedubes Indonesia)",
+        "Review kedubes 15 Feb - 1 Mar",
+        "Review final CSC",
+        "Pengumuman Jul-Ags"
+      ],
+      "tips": "Jalur paling realistis untuk China. Pre-admission letter jadi kunci: email kampus/profesor sejak sekarang.",
+      "url": "https://id.china-embassy.gov.cn/eng/whjy/lxxx/202610/t20261027_12047772.htm"
+    },
+    {
+      "id": "csc-b",
+      "name": "Chinese Government Scholarship - Type B (Chinese University Program)",
+      "provider": "CSC via kampus China",
+      "region": "China",
+      "countries": [
+        "China"
+      ],
+      "levels": [
+        "S2",
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "Sama seperti Type A: kuliah, asrama, asuransi, tunjangan bulanan.",
+      "deadline": "2027-03-31",
+      "deadline_confirmed": false,
+      "deadline_note": "Tiap kampus menentukan sendiri, umumnya Desember 2026 - April 2027. Daftar lebih awal lebih baik.",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "S2 di bawah 35; S3 di bawah 40",
+      "gpa": "Sesuai kampus",
+      "language": "IELTS/TOEFL atau HSK",
+      "eligibility": [
+        "Daftar langsung ke kampus China yang punya kuota CSC Type B",
+        "Agency No. diberikan oleh kampus"
+      ],
+      "documents": [
+        "Sama seperti Type A",
+        "Plus formulir aplikasi kampus"
+      ],
+      "steps": [
+        "Pilih kampus (Tsinghua, Zhejiang, Fudan, SJTU, dll)",
+        "Daftar di portal kampus + campuschina.org",
+        "Kampus menyeleksi dan mengusulkan ke CSC"
+      ],
+      "tips": "Boleh daftar ke beberapa kampus (dengan Agency No. berbeda). Banyak kampus juga punya 'President Scholarship' sendiri.",
+      "url": "https://www.campuschina.org/"
+    },
+    {
+      "id": "anso",
+      "name": "CAS-ANSO Scholarship (UCAS / USTC)",
+      "provider": "Alliance of International Science Organizations (Chinese Academy of Sciences)",
+      "region": "China",
+      "countries": [
+        "China"
+      ],
+      "levels": [
+        "S2",
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "Bebas kuliah, tunjangan CNY 3.000/bulan (S2) atau CNY 5.000-6.000 (S3), asuransi, asrama.",
+      "deadline": "2027-01-31",
+      "deadline_confirmed": false,
+      "deadline_note": "Siklus 2026 tutup 31 Jan 2026 (Beijing). Panggilan 2027 belum diumumkan per Okt 2026.",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "S2 di bawah 30; S3 di bawah 35",
+      "gpa": "Prestasi akademik baik",
+      "language": "IELTS 6.0 / TOEFL 80 (program Inggris)",
+      "eligibility": [
+        "Bidang sains & teknologi (STEM)",
+        "Pilih UCAS atau USTC, tidak boleh keduanya",
+        "S3: biasanya perlu supervisor"
+      ],
+      "documents": [
+        "Aplikasi UCAS/USTC",
+        "Study plan / research proposal",
+        "2 rekomendasi",
+        "Ijazah + transkrip",
+        "Sertifikat bahasa",
+        "Pemeriksaan kesehatan"
+      ],
+      "steps": [
+        "Daftar via portal UCAS atau USTC",
+        "Pilih CAS-ANSO Scholarship",
+        "Opsional: centang ANSO-CAS-TWAS (S3)"
+      ],
+      "tips": "Bagus untuk lulusan STEM. Hubungi profesor di institut CAS lebih dulu.",
+      "url": "https://www.anso.org.cn/programmes/talent/scholarship/"
+    },
+    {
+      "id": "yenching",
+      "name": "Yenching Academy of Peking University",
+      "provider": "Peking University",
+      "region": "China",
+      "countries": [
+        "China"
+      ],
+      "levels": [
+        "S2"
+      ],
+      "funding": "full",
+      "coverage": "Biaya kuliah, asrama, tunjangan bulanan, tiket PP, studi lapangan.",
+      "deadline": "2026-11-30",
+      "deadline_confirmed": true,
+      "deadline_note": "30 Nov 2026 09:00 waktu Beijing (cohort 2027).",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "Tidak ada batas tegas (umumnya di bawah 30)",
+      "gpa": "Sangat tinggi",
+      "language": "IELTS 7.0 / TOEFL iBT 100 (non-native)",
+      "eligibility": [
+        "Lulus S1 sebelum 31 Agustus 2027",
+        "Minat pada China Studies (interdisipliner)"
+      ],
+      "documents": [
+        "Personal statement",
+        "Essay",
+        "3 rekomendasi",
+        "CV",
+        "Transkrip",
+        "Sertifikat bahasa"
+      ],
+      "steps": [
+        "Aplikasi online",
+        "Wawancara",
+        "Pengumuman Maret"
+      ],
+      "tips": "Deadline sangat dekat: hanya realistis kalau essay & rekomendasi sudah siap.",
+      "url": "https://yenching.pku.edu.cn/"
+    },
+    {
+      "id": "schwarzman",
+      "name": "Schwarzman Scholars (Tsinghua University)",
+      "provider": "Schwarzman Scholars",
+      "region": "China",
+      "countries": [
+        "China"
+      ],
+      "levels": [
+        "S2"
+      ],
+      "funding": "full",
+      "coverage": "Biaya kuliah, asrama, tiket, tunjangan, study tour. Program 1 tahun Master of Global Affairs.",
+      "deadline": "2026-09-09",
+      "deadline_confirmed": true,
+      "deadline_note": "Siklus 2027/28 sudah tutup. Siklus berikut dibuka April 2027, tutup ~September 2027.",
+      "intake": "Agustus 2028 (siklus berikutnya)",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "18-28 tahun",
+      "gpa": "Sangat tinggi",
+      "language": "IELTS 7.0 / TOEFL iBT 100",
+      "eligibility": [
+        "Lulus S1 sebelum Agustus 2028",
+        "Bukti kepemimpinan kuat"
+      ],
+      "documents": [
+        "Essay kepemimpinan",
+        "Video",
+        "3 rekomendasi",
+        "Transkrip",
+        "CV"
+      ],
+      "steps": [
+        "Aplikasi Apr-Sep 2027",
+        "Wawancara Okt-Nov"
+      ],
+      "tips": "Siapkan pengalaman kepemimpinan sejak sekarang untuk siklus September 2027.",
+      "url": "https://www.schwarzmanscholars.org/admissions/"
+    },
+    {
+      "id": "sgs",
+      "name": "Shanghai Government Scholarship (SGS)",
+      "provider": "Pemerintah Kota Shanghai",
+      "region": "China",
+      "countries": [
+        "China"
+      ],
+      "levels": [
+        "S2",
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "Type A: kuliah + asrama + tunjangan + asuransi. Type B: kuliah saja.",
+      "deadline": "2027-04-30",
+      "deadline_confirmed": false,
+      "deadline_note": "Tiap kampus Shanghai berbeda, umumnya Desember 2026 - April 2027.",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "S2 di bawah 35; S3 di bawah 40",
+      "gpa": "Sesuai kampus",
+      "language": "IELTS/TOEFL atau HSK",
+      "eligibility": [
+        "Daftar ke kampus di Shanghai (Fudan, SJTU, Tongji, ECNU, dll)",
+        "Tidak sedang menerima beasiswa pemerintah China lain"
+      ],
+      "documents": [
+        "Formulir kampus",
+        "Study plan / research proposal",
+        "2 rekomendasi",
+        "Ijazah + transkrip",
+        "Pemeriksaan kesehatan",
+        "SKCK"
+      ],
+      "steps": [
+        "Daftar via portal kampus Shanghai",
+        "Pilih SGS di formulir"
+      ],
+      "tips": "Cadangan bagus kalau tidak lolos CSC.",
+      "url": "https://lxs.ecnu.edu.cn/en_scholarship_undergraduate_shanghai_government_scholarship"
+    },
+    {
+      "id": "iclts",
+      "name": "International Chinese Language Teachers Scholarship (MTCSOL)",
+      "provider": "CLEC (Center for Language Education and Cooperation)",
+      "region": "China",
+      "countries": [
+        "China"
+      ],
+      "levels": [
+        "S2"
+      ],
+      "funding": "full",
+      "coverage": "Bebas kuliah, asrama, asuransi, tunjangan ~CNY 3.000/bulan.",
+      "deadline": "2027-05-15",
+      "deadline_confirmed": false,
+      "deadline_note": "Perkiraan, siklus 2026 tutup ~15 Mei. Kampus bisa lebih awal.",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "16-35 tahun",
+      "gpa": "Sesuai kampus",
+      "language": "HSK 4 ≥ 180 + HSKK menengah (umumnya)",
+      "eligibility": [
+        "Program Master Teaching Chinese to Speakers of Other Languages",
+        "Rekomendasi dari Confucius Institute / lembaga terkait diutamakan"
+      ],
+      "documents": [
+        "Formulir CLEC",
+        "HSK + HSKK",
+        "2 rekomendasi",
+        "Ijazah + transkrip",
+        "Paspor"
+      ],
+      "steps": [
+        "Daftar di cis.chinese.cn",
+        "Pilih kampus & program MTCSOL"
+      ],
+      "tips": "Hanya relevan kalau Anda bisa Mandarin dan tertarik jadi pengajar Bahasa Mandarin.",
+      "url": "https://cis.chinese.cn/"
+    },
+    {
+      "id": "hkpfs",
+      "name": "Hong Kong PhD Fellowship Scheme (HKPFS)",
+      "provider": "Research Grants Council Hong Kong",
+      "region": "China",
+      "countries": [
+        "China (Hong Kong)"
+      ],
+      "levels": [
+        "S3"
+      ],
+      "funding": "full",
+      "coverage": "HK$344.400/tahun + HK$14.400/tahun untuk konferensi, hingga 3-4 tahun.",
+      "deadline": "2026-12-01",
+      "deadline_confirmed": true,
+      "deadline_note": "1 Des 2026 12:00 waktu Hong Kong (aplikasi awal RGC). Kampus juga punya deadline sendiri di sekitar tanggal itu.",
+      "intake": "September 2027",
+      "work_exp": "",
+      "final_year_ok": true,
+      "age": "Tidak ada batas",
+      "gpa": "Sangat tinggi",
+      "language": "IELTS 6.5 / TOEFL iBT 80",
+      "eligibility": [
+        "Bisa daftar PhD langsung dari S1 di banyak program Hong Kong (PhD 4 tahun)",
+        "Daftar ke program PhD di kampus HK (HKU, CUHK, HKUST, PolyU, CityU, dll)"
+      ],
+      "documents": [
+        "Aplikasi RGC (reference number)",
+        "Aplikasi kampus HK",
+        "Research proposal",
+        "2 rekomendasi",
+        "CV",
+        "Transkrip",
+        "Sertifikat bahasa"
+      ],
+      "steps": [
+        "Daftar di portal HKPFS (dapat reference number)",
+        "Daftar ke kampus HK dengan nomor itu",
+        "Wawancara",
+        "Hasil sekitar Mei 2027"
+      ],
+      "tips": "Satu-satunya S3 di daftar ini yang bisa langsung dari S1. Deadline sangat dekat.",
+      "url": "https://cerg1.ugc.edu.hk/hkpfs/index.html"
+    }
+  ]
+}
